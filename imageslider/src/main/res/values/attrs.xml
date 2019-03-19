@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TooltipIndicator">
+        <attr name="auto_play" format="boolean" />
+        <attr name="selected_dot" format="reference" />
+        <attr name="unselected_dot" format="reference" />
+
+    </declare-styleable>
+
+</resources>
