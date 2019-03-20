@@ -8,10 +8,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import com.denzcoskun.imageslider.R
+import com.denzcoskun.imageslider.interfaces.UserClickCallbacks
 import com.squareup.picasso.Picasso
 
 
-class ViewPagerAdapter(context: Context?, imageList: List<String>) : PagerAdapter() {
+class ViewPagerAdapter(context: Context?, imageList: List<String>, private val userClickCallbacks: UserClickCallbacks?) : PagerAdapter() {
 
     private var imageList: List<String>? = imageList
     private var layoutInflater: LayoutInflater? = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater?
@@ -40,7 +41,7 @@ class ViewPagerAdapter(context: Context?, imageList: List<String>) : PagerAdapte
         container.addView(itemView)
 
 
-        imageView.setOnClickListener{System.out.println("")}
+        imageView.setOnClickListener{userClickCallbacks?.onUserClick(position)}
 
         return itemView
     }

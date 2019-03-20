@@ -2,12 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
               tools:context=".MainActivity">
 
     <com.denzcoskun.imageslider.ImageSlider
             android:id="@+id/image_slider"
             android:layout_width="wrap_content"
-            android:layout_height="300dp"/>
+            android:layout_height="300dp"
+            app:auto_play="true"
+            app:period="3000"
+            app:delay="0"
+            app:selected_dot="@drawable/default_selected_dot"
+            app:unselected_dot="@drawable/default_unselected_dot" />
 
 </LinearLayout>

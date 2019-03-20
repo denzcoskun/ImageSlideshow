@@ -10,6 +10,7 @@ import android.widget.RelativeLayout
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import com.denzcoskun.imageslider.adapters.ViewPagerAdapter
+import com.denzcoskun.imageslider.interfaces.UserClickCallbacks
 import java.util.*
 
 
@@ -23,19 +24,41 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
     private var currentPage = 0
     private var imageCount = 0
+
+    private var period: Long = 0
+    private var delay: Long = 0
+    private var autoPlay = false
+
+    private var selectedDot = 0
+    private var unselectedDot = 0
     init{
         LayoutInflater.from(getContext()).inflate(R.layout.image_slider, this, true)
         viewPager = findViewById(R.id.view_pager)
         pagerDots = findViewById(R.id.pager_dots)
+
+        val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.ImageSlider, defStyleAttr, defStyleAttr)
+
+
+        period = typedArray.getInt(R.styleable.ImageSlider_period, 1000).toLong()
+        delay = typedArray.getInt(R.styleable.ImageSlider_delay, 1000).toLong()
+        autoPlay = typedArray.getBoolean(R.styleable.ImageSlider_auto_play, false)
+        selectedDot = typedArray.getResourceId(R.styleable.ImageSlider_selected_dot, R.drawable.default_selected_dot)
+        unselectedDot = typedArray.getResourceId(R.styleable.ImageSlider_unselected_dot, R.drawable.default_unselected_dot)
+
     }
 
     fun setImageList(imageList: List<String>){
-        var viewPagerAdapter =  ViewPagerAdapter(context, imageList);
+        setImageList(imageList, null)
+    }
+
+    fun setImageList(imageList: List<String>, userClickCallbacks: UserClickCallbacks?){
+        val viewPagerAdapter =  ViewPagerAdapter(context, imageList, userClickCallbacks)
         viewPager!!.adapter = viewPagerAdapter
         imageCount = imageList.size
         setupDots(imageList.size)
-        autoSliding()
+        if(autoPlay){ autoSliding() }
     }
+
 
     fun setupDots(size: Int) {
 
@@ -43,7 +66,7 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
         for (i in 0 until size) {
             dots!![i] = ImageView(context)
-            dots!![i]!!.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.dot_unselected))
+            dots!![i]!!.setImageDrawable(ContextCompat.getDrawable(context, unselectedDot))
             val params = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -51,7 +74,7 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
             params.setMargins(8, 0, 8, 0)
             pagerDots!!.addView(dots!![i], params)
         }
-        dots!![0]!!.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.dot_selected))
+        dots!![0]!!.setImageDrawable(ContextCompat.getDrawable(context, selectedDot))
 
         viewPager!!.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
@@ -59,9 +82,9 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
             override fun onPageSelected(position: Int) {
                 currentPage = position
                 for (dot in dots!!) {
-                    dot!!.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.dot_unselected))
+                    dot!!.setImageDrawable(ContextCompat.getDrawable(context,unselectedDot))
                 }
-                dots!![position]!!.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.dot_selected))
+                dots!![position]!!.setImageDrawable(ContextCompat.getDrawable(context, selectedDot))
             }
 
             override fun onPageScrollStateChanged(state: Int) {}
@@ -81,7 +104,7 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
             override fun run() {
                 handler.post(Update)
             }
-        }, 0, 1000)
+        }, delay, period)
     }
 }
 
