@@ -1,6 +1,7 @@
 package com.denzcoskun.imageslider
 
 import android.content.Context
+import android.os.Handler
 import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.widget.ImageView
@@ -9,6 +10,7 @@ import android.widget.RelativeLayout
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import com.denzcoskun.imageslider.adapters.ViewPagerAdapter
+import java.util.*
 
 
 class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
@@ -17,9 +19,10 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
     private var viewPager: ViewPager? = null
     private var pagerDots: LinearLayout? = null
 
-
     private var dots: Array<ImageView?>? = null
 
+    private var currentPage = 0
+    private var imageCount = 0
     init{
         LayoutInflater.from(getContext()).inflate(R.layout.image_slider, this, true)
         viewPager = findViewById(R.id.view_pager)
@@ -29,7 +32,9 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
     fun setImageList(imageList: List<String>){
         var viewPagerAdapter =  ViewPagerAdapter(context, imageList);
         viewPager!!.adapter = viewPagerAdapter
+        imageCount = imageList.size
         setupDots(imageList.size)
+        autoSliding()
     }
 
     fun setupDots(size: Int) {
@@ -52,6 +57,7 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
             override fun onPageSelected(position: Int) {
+                currentPage = position
                 for (dot in dots!!) {
                     dot!!.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.dot_unselected))
                 }
@@ -61,4 +67,23 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
             override fun onPageScrollStateChanged(state: Int) {}
         })
     }
+
+    fun autoSliding(){
+        val handler = Handler()
+        val Update = Runnable {
+            if (currentPage == imageCount) {
+                currentPage = 0
+            }
+            viewPager!!.setCurrentItem(currentPage++, true)
+        }
+        val swipeTimer = Timer()
+        swipeTimer.schedule(object : TimerTask() {
+            override fun run() {
+                handler.post(Update)
+            }
+        }, 0, 1000)
+    }
 }
+
+
+
