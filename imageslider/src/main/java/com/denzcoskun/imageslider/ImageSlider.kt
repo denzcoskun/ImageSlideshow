@@ -10,15 +10,17 @@ import android.widget.RelativeLayout
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import com.denzcoskun.imageslider.adapters.ViewPagerAdapter
-import com.denzcoskun.imageslider.interfaces.UserClickCallbacks
+import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import java.util.*
 
 
 class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : RelativeLayout(context, attrs, defStyleAttr) {
 
+
     private var viewPager: ViewPager? = null
     private var pagerDots: LinearLayout? = null
+    private var viewPagerAdapter: ViewPagerAdapter? = null
 
     private var dots: Array<ImageView?>? = null
 
@@ -47,12 +49,9 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
     }
 
-    fun setImageList(imageList: List<String>){
-        setImageList(imageList, null)
-    }
 
-    fun setImageList(imageList: List<String>, userClickCallbacks: UserClickCallbacks?){
-        val viewPagerAdapter =  ViewPagerAdapter(context, imageList, userClickCallbacks)
+    fun setImageList(imageList: List<String>){
+        viewPagerAdapter =  ViewPagerAdapter(context, imageList)
         viewPager!!.adapter = viewPagerAdapter
         imageCount = imageList.size
         setupDots(imageList.size)
@@ -105,6 +104,10 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
                 handler.post(Update)
             }
         }, delay, period)
+    }
+
+    fun setItemClickListener(itemClickListener: ItemClickListener) {
+        viewPagerAdapter?.setItemClickListener(itemClickListener)
     }
 }
 

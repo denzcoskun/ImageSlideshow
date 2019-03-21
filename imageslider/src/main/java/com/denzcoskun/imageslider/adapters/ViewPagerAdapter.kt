@@ -8,14 +8,17 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import com.denzcoskun.imageslider.R
-import com.denzcoskun.imageslider.interfaces.UserClickCallbacks
+import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.squareup.picasso.Picasso
 
 
-class ViewPagerAdapter(context: Context?, imageList: List<String>, private val userClickCallbacks: UserClickCallbacks?) : PagerAdapter() {
+class ViewPagerAdapter(context: Context?, imageList: List<String>) : PagerAdapter() {
 
     private var imageList: List<String>? = imageList
     private var layoutInflater: LayoutInflater? = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater?
+
+
+    private var itemClickListener: ItemClickListener? = null
 
     override fun isViewFromObject(view: View, obj: Any): Boolean {
         return view == obj
@@ -24,7 +27,6 @@ class ViewPagerAdapter(context: Context?, imageList: List<String>, private val u
     override fun getCount(): Int {
         return imageList!!.size
     }
-
 
     override fun instantiateItem(container: ViewGroup, position: Int): View{
 
@@ -40,13 +42,14 @@ class ViewPagerAdapter(context: Context?, imageList: List<String>, private val u
 
         container.addView(itemView)
 
-
-        imageView.setOnClickListener{userClickCallbacks?.onUserClick(position)}
+        imageView.setOnClickListener{itemClickListener?.onItemSelected(position)}
 
         return itemView
     }
 
-
+    fun setItemClickListener(itemClickListener: ItemClickListener) {
+        this.itemClickListener = itemClickListener
+    }
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
         container.removeView(`object` as LinearLayout)
