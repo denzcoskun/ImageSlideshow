@@ -10,7 +10,8 @@
         android:id="@+id/image_slider"
         android:layout_width="wrap_content"
         android:layout_height="300dp"
-        app:auto_play="true"
+        app:auto_cycle="true"
+        app:corner_radius="20"
         app:period="1000"
         app:delay="0"/>
 ```
