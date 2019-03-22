@@ -21,33 +21,22 @@ app:unselected_dot="@drawable/default_unselected_dot"
 ```
 - Add ImageSlider to your **Activity**
 ```kt
- var imagelist = ArrayList<String>()
- imagelist.add("https://images4.alphacoders.com/740/thumb-1920-740289.png")
- imagelist.add("https://i.pinimg.com/originals/fd/c9/98/fdc9984f77e922212d62e0cd330b10c6.png")
- imagelist.add("https://d37x086vserhlm.cloudfront.net/wp-content/uploads/2016/11/24001621/your-name.-film2-e1480003095479.jpeg")
- val imageSlider = findViewById<ImageSlider>(R.id.image_slider)
- imageSlider.setImageList(imagelist)
-```
-- If you add `UserClickCallbaks` to your **Activity**, you can use click listener. 
-```kt
-class MainActivity : AppCompatActivity(), UserClickCallbacks {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        var imagelist = ArrayList<String>()
-        imagelist.add("https://images4.alphacoders.com/740/thumb-1920-740289.png")
-        imagelist.add("https://i.pinimg.com/originals/fd/c9/98/fdc9984f77e922212d62e0cd330b10c6.png")
-        imagelist.add("https://d37x086vserhlm.cloudfront.net/wp-content/uploads/2016/11/24001621/your-name.-film2-e1480003095479.jpeg")
+val imageList = ArrayList<SlideModel>()
+	// imageList.add(SlideModel("String Url" or R.drawable)
+	// imageList.add(SlideModel("String Url" or R.drawable, "title") Also you can add title
+        imageList.add(SlideModel("https://1.bp.blogspot.com/-GUZsgr8my50/XJUWOhyHyaI/AAAAAAAABUo/bljp3LCS3SUtj-judzlntiETt7G294WcgCLcBGAs/s1600/fox.jpg", "Twin foxes"))
+        imageList.add(SlideModel("https://2.bp.blogspot.com/-CyLH9NnPoAo/XJUWK2UHiMI/AAAAAAAABUk/D8XMUIGhDbwEhC29dQb-7gfYb16GysaQgCLcBGAs/s1600/tiger.jpg"))
+        imageList.add(SlideModel("https://3.bp.blogspot.com/-uJtCbNrBzEc/XJUWQPOSrfI/AAAAAAAABUs/ZlReSwpfI3Ack60629Rv0N8hSrPFHb3TACLcBGAs/s1600/elephant.jpg", "Alone Elephant"))
         val imageSlider = findViewById<ImageSlider>(R.id.image_slider)
-        imageSlider.setImageList(imagelist, this)
+        imageSlider.setImageList(imageList)
+```
+- You can use click listener. 
+```kt
+imageSlider.setItemClickListener(object : ItemClickListener {
+    override fun onItemSelected(position: Int) {
+	// You can listen here
     }
-
-    override fun onUserClick(position: Int) {
-        // You can use here
-    }
-}
+})
 ```
 ## Setup
 ```xml
