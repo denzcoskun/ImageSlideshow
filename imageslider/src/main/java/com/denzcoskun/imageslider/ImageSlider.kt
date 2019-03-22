@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import com.denzcoskun.imageslider.adapters.ViewPagerAdapter
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
+import com.denzcoskun.imageslider.models.SlideModel
 import java.util.*
 
 
@@ -50,7 +51,7 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
     }
 
 
-    fun setImageList(imageList: List<String>){
+    fun setImageList(imageList: List<SlideModel>){
         viewPagerAdapter =  ViewPagerAdapter(context, imageList)
         viewPager!!.adapter = viewPagerAdapter
         imageCount = imageList.size

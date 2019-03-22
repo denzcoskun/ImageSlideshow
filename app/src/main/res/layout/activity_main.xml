@@ -6,13 +6,13 @@
               tools:context=".MainActivity">
 
     <com.denzcoskun.imageslider.ImageSlider
-            android:id="@+id/image_slider"
-            android:layout_width="wrap_content"
-            android:layout_height="300dp"
-            app:auto_play="true"
-            app:period="3000"
-            app:delay="0"
-            app:selected_dot="@drawable/default_selected_dot"
-            app:unselected_dot="@drawable/default_unselected_dot" />
+        android:id="@+id/image_slider"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        app:auto_play="true"
+        app:period="1000"
+        app:delay="0"
+        app:selected_dot="@drawable/default_selected_dot"
+        app:unselected_dot="@drawable/default_unselected_dot" />
 
 </LinearLayout>

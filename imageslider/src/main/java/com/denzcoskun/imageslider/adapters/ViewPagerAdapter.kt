@@ -9,12 +9,13 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import com.denzcoskun.imageslider.R
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
+import com.denzcoskun.imageslider.models.SlideModel
 import com.squareup.picasso.Picasso
 
 
-class ViewPagerAdapter(context: Context?, imageList: List<String>) : PagerAdapter() {
+class ViewPagerAdapter(context: Context?, imageList: List<SlideModel>) : PagerAdapter() {
 
-    private var imageList: List<String>? = imageList
+    private var imageList: List<SlideModel>? = imageList
     private var layoutInflater: LayoutInflater? = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater?
 
 
@@ -34,11 +35,19 @@ class ViewPagerAdapter(context: Context?, imageList: List<String>) : PagerAdapte
 
         val imageView = itemView.findViewById<ImageView>(R.id.imageView)
 
-        Picasso.get()
-            .load(imageList!![position])
-            .fit()
-            .error(R.drawable.deneme)
-            .into(imageView)
+        if(imageList!![position].imageUrl == null){
+            Picasso.get()
+                .load(imageList!![position].imagePath!!) // Int
+                .fit()
+                .error(R.drawable.deneme)
+                .into(imageView)
+        }else{
+            Picasso.get()
+                .load(imageList!![position].imageUrl!!) // String
+                .fit()
+                .error(R.drawable.deneme)
+                .into(imageView)
+        }
 
         container.addView(itemView)
 
