@@ -1,4 +1,4 @@
-![imageslideshow](https://user-images.githubusercontent.com/15522554/54722650-009ca200-4b76-11e9-8478-c4ad0aa64aab.jpg)
+![iss](https://user-images.githubusercontent.com/15522554/54849260-c0176280-4cf4-11e9-88f3-a3ce8cc3aaae.png)
 
 ### Android Image Slider
 
