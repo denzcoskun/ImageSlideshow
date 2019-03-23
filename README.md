@@ -2,7 +2,10 @@
 <a href="https://github.com/Ramotion/cardslider-android">
 <img align="left" src="https://user-images.githubusercontent.com/15522554/54739898-b09bfa80-4bca-11e9-9248-86161b587116.gif"/></a>
 <p><h1 align="left">Android Image Slider</h1></p>
-<p>This is an android image slider library. Just add the images you want to view. You can use automatic scrolling for the time you set. You can also add the title you want to the images.</p>
+<p>This is an android image slider library. Just add the images you want to view. </p>
+- You can use automatic scrolling for the time you set. 
+- You can also add the title you want to the images.
+- You can set corner radius images.
 </br></br></br></br></br></br></br></br></br>
 
 ## Usage
