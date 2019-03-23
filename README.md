@@ -8,7 +8,7 @@
   <li>You can also add the title you want to the images.</li>
   <li>You can set corner radius images.</li>
 </ul>
-</br></br></br></br></br></br>
+</br></br></br></br></br></br></br>
 
 ## Usage
 - Add ImageSlider to your **layout**
