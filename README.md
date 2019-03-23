@@ -3,7 +3,7 @@
 <img align="left" src="https://user-images.githubusercontent.com/15522554/54739898-b09bfa80-4bca-11e9-9248-86161b587116.gif"/></a>
 <p><h1 align="left">Android Image Slider</h1></p>
 <p>This is an android image slider library. Just add the images you want to view. </p>
-<ul>
+<ul padding-left: 10px;>
   <li>You can use automatic scrolling for the time you set. </li>
   <li>You can also add the title you want to the images.</li>
   <li>You can set corner radius images.</li>
