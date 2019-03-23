@@ -1,4 +1,4 @@
-![iss](https://user-images.githubusercontent.com/15522554/54849260-c0176280-4cf4-11e9-88f3-a3ce8cc3aaae.png)
+![iss](https://user-images.githubusercontent.com/15522554/54867096-7169d700-4d8d-11e9-8f9a-bee162a01427.png)
 
 ### Android Image Slider
 
