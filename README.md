@@ -4,6 +4,7 @@
 <p><h1 align="left">Image Slider [Android]</h1></p>
 <p><h3>This is an android image slider library. Just add the images you want to view. You can use automatic scrolling for the time you set. You can also add the title you want to the images.</h3></p>
 </br></br></br>
+
 ## Usage
 - Add ImageSlider to your **layout**
 ```xml
