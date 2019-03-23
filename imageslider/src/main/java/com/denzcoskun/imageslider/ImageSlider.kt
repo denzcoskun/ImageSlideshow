@@ -18,7 +18,6 @@ import java.util.*
 class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : RelativeLayout(context, attrs, defStyleAttr) {
 
-
     private var viewPager: ViewPager? = null
     private var pagerDots: LinearLayout? = null
     private var viewPagerAdapter: ViewPagerAdapter? = null
@@ -28,12 +27,14 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
     private var currentPage = 0
     private var imageCount = 0
 
+    private var cornerRadius: Int = 0
     private var period: Long = 0
     private var delay: Long = 0
-    private var autoPlay = false
+    private var autoCycle = false
 
     private var selectedDot = 0
     private var unselectedDot = 0
+
     init{
         LayoutInflater.from(getContext()).inflate(R.layout.image_slider, this, true)
         viewPager = findViewById(R.id.view_pager)
@@ -41,24 +42,22 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.ImageSlider, defStyleAttr, defStyleAttr)
 
-
+        cornerRadius = typedArray.getInt(R.styleable.ImageSlider_corner_radius, 0)
         period = typedArray.getInt(R.styleable.ImageSlider_period, 1000).toLong()
         delay = typedArray.getInt(R.styleable.ImageSlider_delay, 1000).toLong()
-        autoPlay = typedArray.getBoolean(R.styleable.ImageSlider_auto_play, false)
+        autoCycle = typedArray.getBoolean(R.styleable.ImageSlider_auto_cycle, false)
         selectedDot = typedArray.getResourceId(R.styleable.ImageSlider_selected_dot, R.drawable.default_selected_dot)
         unselectedDot = typedArray.getResourceId(R.styleable.ImageSlider_unselected_dot, R.drawable.default_unselected_dot)
 
     }
 
-
     fun setImageList(imageList: List<SlideModel>){
-        viewPagerAdapter =  ViewPagerAdapter(context, imageList)
+        viewPagerAdapter =  ViewPagerAdapter(context, imageList, cornerRadius)
         viewPager!!.adapter = viewPagerAdapter
         imageCount = imageList.size
         setupDots(imageList.size)
-        if(autoPlay){ autoSliding() }
+        if(autoCycle){ autoSliding() }
     }
-
 
     fun setupDots(size: Int) {
 
