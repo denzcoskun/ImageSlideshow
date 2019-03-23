@@ -6,7 +6,7 @@
 <p>You can use automatic scrolling for the time you set.  </p>
 <p>You can also add the title you want to the images.</p>
 <p>You can set corner radius images.</p>
-</br></br></br></br>
+</br></br>
 
 ## Usage
 - Add ImageSlider to your **layout**
