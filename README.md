@@ -6,7 +6,10 @@
 <p>You can use automatic scrolling for the time you set.  </p>
 <p>You can also add the title you want to the images.</p>
 <p>You can set corner radius images.</p>
-</br></br>
+</br>
+
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-ImageSlideshow-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7587)
+[![license](https://img.shields.io/github/license/denzcoskun/imageslideshow.svg?style=popout)](https://opensource.org/licenses/Apache-2.0)
 
 ## Usage
 - Add ImageSlider to your **layout**
