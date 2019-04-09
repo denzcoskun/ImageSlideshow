@@ -5,6 +5,7 @@
         <attr name="corner_radius" format="integer" />
         <attr name="period" format="integer" />
         <attr name="delay" format="integer" />
+        <attr name="error_image" format="reference" />
         <attr name="selected_dot" format="reference" />
         <attr name="unselected_dot" format="reference" />
     </declare-styleable>

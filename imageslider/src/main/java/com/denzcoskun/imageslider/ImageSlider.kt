@@ -34,6 +34,7 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
     private var selectedDot = 0
     private var unselectedDot = 0
+    private var errorImage = 0
 
     init{
         LayoutInflater.from(getContext()).inflate(R.layout.image_slider, this, true)
@@ -46,13 +47,14 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
         period = typedArray.getInt(R.styleable.ImageSlider_period, 1000).toLong()
         delay = typedArray.getInt(R.styleable.ImageSlider_delay, 1000).toLong()
         autoCycle = typedArray.getBoolean(R.styleable.ImageSlider_auto_cycle, false)
+        errorImage = typedArray.getResourceId(R.styleable.ImageSlider_error_image, R.drawable.error)
         selectedDot = typedArray.getResourceId(R.styleable.ImageSlider_selected_dot, R.drawable.default_selected_dot)
         unselectedDot = typedArray.getResourceId(R.styleable.ImageSlider_unselected_dot, R.drawable.default_unselected_dot)
 
     }
 
     fun setImageList(imageList: List<SlideModel>){
-        viewPagerAdapter =  ViewPagerAdapter(context, imageList, cornerRadius)
+        viewPagerAdapter =  ViewPagerAdapter(context, imageList, cornerRadius, errorImage)
         viewPager!!.adapter = viewPagerAdapter
         imageCount = imageList.size
         setupDots(imageList.size)
