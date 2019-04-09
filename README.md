@@ -23,6 +23,10 @@
         app:period="1000"
         app:delay="0"/>
 ```
+- You can change error image.
+```xml
+ app:error_image="@drawable/error"
+```
 - You can change indicators.
 ```xml
 app:selected_dot="@drawable/default_selected_dot"
@@ -57,7 +61,7 @@ allprojects {
 }
 
 dependencies {
-	implementation 'com.github.denzcoskun:ImageSlideshow:0.0.2'
+	implementation 'com.github.denzcoskun:ImageSlideshow:0.0.3'
 }
 ```
 ## License
