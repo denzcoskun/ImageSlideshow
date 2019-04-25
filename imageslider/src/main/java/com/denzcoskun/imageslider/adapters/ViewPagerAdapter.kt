@@ -16,7 +16,7 @@ import com.denzcoskun.imageslider.transformation.RoundedTransformation
 import com.squareup.picasso.Picasso
 
 
-class ViewPagerAdapter(context: Context?, imageList: List<SlideModel>, private var radius: Int, private var errorImage: Int) : PagerAdapter() {
+class ViewPagerAdapter(context: Context?, imageList: List<SlideModel>, private var radius: Int, private var errorImage: Int, private var placeholder: Int) : PagerAdapter() {
 
     private var imageList: List<SlideModel>? = imageList
     private var layoutInflater: LayoutInflater? = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater?
@@ -50,6 +50,7 @@ class ViewPagerAdapter(context: Context?, imageList: List<SlideModel>, private v
                 .load(imageList!![position].imagePath!!) // Int
                 .fit()
                 .transform(RoundedTransformation(radius,0))
+                .placeholder(placeholder)
                 .error(errorImage)
                 .into(imageView)
         }else{
@@ -57,6 +58,7 @@ class ViewPagerAdapter(context: Context?, imageList: List<SlideModel>, private v
                 .load(imageList!![position].imageUrl!!) // String
                 .fit()
                 .transform(RoundedTransformation(radius,0))
+                .placeholder(placeholder)
                 .error(errorImage)
                 .into(imageView)
         }
