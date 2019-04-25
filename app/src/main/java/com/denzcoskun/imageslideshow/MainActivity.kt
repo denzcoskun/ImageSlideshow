@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         imageSlider.setItemClickListener(object : ItemClickListener {
             override fun onItemSelected(position: Int) {
-
+                // You can listen here.
             }
         })
     }
