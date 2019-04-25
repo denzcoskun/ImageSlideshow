@@ -65,7 +65,7 @@ allprojects {
 }
 
 dependencies {
-	implementation 'com.github.denzcoskun:ImageSlideshow:0.0.3'
+	implementation 'com.github.denzcoskun:ImageSlideshow:0.0.4'
 }
 ```
 ## License
