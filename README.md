@@ -23,6 +23,10 @@
         app:period="1000"
         app:delay="0"/>
 ```
+- You can change placeholder image.
+```xml
+ app:placeholder="@drawable/placeholder"
+```
 - You can change error image.
 ```xml
  app:error_image="@drawable/error"
