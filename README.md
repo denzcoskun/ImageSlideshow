@@ -40,13 +40,18 @@ app:unselected_dot="@drawable/default_unselected_dot"
 - Add ImageSlider to your **Activity**
 ```kt
 val imageList = ArrayList<SlideModel>()
-	// imageList.add(SlideModel("String Url" or R.drawable)
-	// imageList.add(SlideModel("String Url" or R.drawable, "title") Also you can add title
-        imageList.add(SlideModel("https://1.bp.blogspot.com/-GUZsgr8my50/XJUWOhyHyaI/AAAAAAAABUo/bljp3LCS3SUtj-judzlntiETt7G294WcgCLcBGAs/s1600/fox.jpg", "Twin foxes"))
-        imageList.add(SlideModel("https://2.bp.blogspot.com/-CyLH9NnPoAo/XJUWK2UHiMI/AAAAAAAABUk/D8XMUIGhDbwEhC29dQb-7gfYb16GysaQgCLcBGAs/s1600/tiger.jpg"))
-        imageList.add(SlideModel("https://3.bp.blogspot.com/-uJtCbNrBzEc/XJUWQPOSrfI/AAAAAAAABUs/ZlReSwpfI3Ack60629Rv0N8hSrPFHb3TACLcBGAs/s1600/elephant.jpg", "Alone Elephant"))
-        val imageSlider = findViewById<ImageSlider>(R.id.image_slider)
-        imageSlider.setImageList(imageList)
+// imageList.add(SlideModel("String Url" or R.drawable)
+// imageList.add(SlideModel("String Url" or R.drawable, "title") You can add title
+// imageList.add(SlideModel("String Url" or R.drawable, "title", true) Also you can add centerCrop scaleType for this image
+imageList.add(SlideModel("https://1.bp.blogspot.com/-GUZsgr8my50/XJUWOhyHyaI/AAAAAAAABUo/bljp3LCS3SUtj-judzlntiETt7G294WcgCLcBGAs/s1600/fox.jpg", "Foxes live wild in the city.", true))
+imageList.add(SlideModel("https://2.bp.blogspot.com/-CyLH9NnPoAo/XJUWK2UHiMI/AAAAAAAABUk/D8XMUIGhDbwEhC29dQb-7gfYb16GysaQgCLcBGAs/s1600/tiger.jpg"))
+imageList.add(SlideModel("https://3.bp.blogspot.com/-uJtCbNrBzEc/XJUWQPOSrfI/AAAAAAAABUs/ZlReSwpfI3Ack60629Rv0N8hSrPFHb3TACLcBGAs/s1600/elephant.jpg", "The population of elephants is decreasing in the world."))
+val imageSlider = findViewById<ImageSlider>(R.id.image_slider)
+imageSlider.setImageList(imageList)
+```
+- You can add centerCrop scaleType for all images. 
+```kt
+imageSlider.setImageList(imageList, true) // centerCrop for all images
 ```
 - You can use click listener. 
 ```kt
@@ -66,7 +71,7 @@ allprojects {
 }
 
 dependencies {
-	implementation 'com.github.denzcoskun:ImageSlideshow:0.0.4'
+	implementation 'com.github.denzcoskun:ImageSlideshow:0.0.5'
 }
 ```
 ## License
