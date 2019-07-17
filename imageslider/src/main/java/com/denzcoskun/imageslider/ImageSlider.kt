@@ -2,21 +2,21 @@ package com.denzcoskun.imageslider
 
 import android.content.Context
 import android.os.Handler
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
+import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
-import android.support.v4.content.ContextCompat
-import android.util.AttributeSet
 import com.denzcoskun.imageslider.adapters.ViewPagerAdapter
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
 import java.util.*
 
 
-class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
-    : RelativeLayout(context, attrs, defStyleAttr) {
+class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+    RelativeLayout(context, attrs, defStyleAttr) {
 
     private var viewPager: ViewPager? = null
     private var pagerDots: LinearLayout? = null
@@ -37,12 +37,13 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
     private var errorImage = 0
     private var placeholder = 0
 
-    init{
+    init {
         LayoutInflater.from(getContext()).inflate(R.layout.image_slider, this, true)
         viewPager = findViewById(R.id.view_pager)
         pagerDots = findViewById(R.id.pager_dots)
 
-        val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.ImageSlider, defStyleAttr, defStyleAttr)
+        val typedArray =
+            context.theme.obtainStyledAttributes(attrs, R.styleable.ImageSlider, defStyleAttr, defStyleAttr)
 
         cornerRadius = typedArray.getInt(R.styleable.ImageSlider_corner_radius, 0)
         period = typedArray.getInt(R.styleable.ImageSlider_period, 1000).toLong()
@@ -51,16 +52,29 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
         placeholder = typedArray.getResourceId(R.styleable.ImageSlider_placeholder, R.drawable.placeholder)
         errorImage = typedArray.getResourceId(R.styleable.ImageSlider_error_image, R.drawable.error)
         selectedDot = typedArray.getResourceId(R.styleable.ImageSlider_selected_dot, R.drawable.default_selected_dot)
-        unselectedDot = typedArray.getResourceId(R.styleable.ImageSlider_unselected_dot, R.drawable.default_unselected_dot)
+        unselectedDot =
+            typedArray.getResourceId(R.styleable.ImageSlider_unselected_dot, R.drawable.default_unselected_dot)
 
     }
 
-    fun setImageList(imageList: List<SlideModel>){
-        viewPagerAdapter =  ViewPagerAdapter(context, imageList, cornerRadius, errorImage, placeholder)
+    fun setImageList(imageList: List<SlideModel>) {
+        viewPagerAdapter = ViewPagerAdapter(context, imageList, cornerRadius, errorImage, placeholder, false)
         viewPager!!.adapter = viewPagerAdapter
         imageCount = imageList.size
         setupDots(imageList.size)
-        if(autoCycle){ autoSliding() }
+        if (autoCycle) {
+            autoSliding()
+        }
+    }
+
+    fun setImageList(imageList: List<SlideModel>, centerCrop: Boolean) {
+        viewPagerAdapter = ViewPagerAdapter(context, imageList, cornerRadius, errorImage, placeholder, centerCrop)
+        viewPager!!.adapter = viewPagerAdapter
+        imageCount = imageList.size
+        setupDots(imageList.size)
+        if (autoCycle) {
+            autoSliding()
+        }
     }
 
     fun setupDots(size: Int) {
@@ -85,7 +99,7 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
             override fun onPageSelected(position: Int) {
                 currentPage = position
                 for (dot in dots!!) {
-                    dot!!.setImageDrawable(ContextCompat.getDrawable(context,unselectedDot))
+                    dot!!.setImageDrawable(ContextCompat.getDrawable(context, unselectedDot))
                 }
                 dots!![position]!!.setImageDrawable(ContextCompat.getDrawable(context, selectedDot))
             }
@@ -94,7 +108,7 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
         })
     }
 
-    fun autoSliding(){
+    fun autoSliding() {
         val handler = Handler()
         val Update = Runnable {
             if (currentPage == imageCount) {
@@ -113,6 +127,7 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
     fun setItemClickListener(itemClickListener: ItemClickListener) {
         viewPagerAdapter?.setItemClickListener(itemClickListener)
     }
+
 }
 
 

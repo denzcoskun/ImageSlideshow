@@ -16,7 +16,7 @@ import com.denzcoskun.imageslider.transformation.RoundedTransformation
 import com.squareup.picasso.Picasso
 
 
-class ViewPagerAdapter(context: Context?, imageList: List<SlideModel>, private var radius: Int, private var errorImage: Int, private var placeholder: Int) : PagerAdapter() {
+class ViewPagerAdapter(context: Context?, imageList: List<SlideModel>, private var radius: Int, private var errorImage: Int, private var placeholder: Int, private var centerCrop: Boolean?) : PagerAdapter() {
 
     private var imageList: List<SlideModel>? = imageList
     private var layoutInflater: LayoutInflater? = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater?
@@ -46,21 +46,43 @@ class ViewPagerAdapter(context: Context?, imageList: List<SlideModel>, private v
         }
 
         if(imageList!![position].imageUrl == null){
-            Picasso.get()
-                .load(imageList!![position].imagePath!!) // Int
-                .fit()
-                .transform(RoundedTransformation(radius,0))
-                .placeholder(placeholder)
-                .error(errorImage)
-                .into(imageView)
+            if(centerCrop!! || imageList!![position].centerCrop){
+                Picasso.get()
+                    .load(imageList!![position].imagePath!!) // Int
+                    .fit()
+                    .centerCrop()
+                    .transform(RoundedTransformation(radius,0))
+                    .placeholder(placeholder)
+                    .error(errorImage)
+                    .into(imageView)
+            }else {
+                Picasso.get()
+                    .load(imageList!![position].imagePath!!) // Int
+                    .fit()
+                    .transform(RoundedTransformation(radius, 0))
+                    .placeholder(placeholder)
+                    .error(errorImage)
+                    .into(imageView)
+            }
         }else{
-            Picasso.get()
-                .load(imageList!![position].imageUrl!!) // String
-                .fit()
-                .transform(RoundedTransformation(radius,0))
-                .placeholder(placeholder)
-                .error(errorImage)
-                .into(imageView)
+            if(centerCrop!! || imageList!![position].centerCrop) {
+                Picasso.get()
+                    .load(imageList!![position].imageUrl!!) // String
+                    .fit()
+                    .centerCrop()
+                    .transform(RoundedTransformation(radius, 0))
+                    .placeholder(placeholder)
+                    .error(errorImage)
+                    .into(imageView)
+            }else {
+                Picasso.get()
+                    .load(imageList!![position].imageUrl!!) // String
+                    .fit()
+                    .transform(RoundedTransformation(radius, 0))
+                    .placeholder(placeholder)
+                    .error(errorImage)
+                    .into(imageView)
+            }
         }
 
         container.addView(itemView)
