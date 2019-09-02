@@ -49,8 +49,8 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
         period = typedArray.getInt(R.styleable.ImageSlider_period, 1000).toLong()
         delay = typedArray.getInt(R.styleable.ImageSlider_delay, 1000).toLong()
         autoCycle = typedArray.getBoolean(R.styleable.ImageSlider_auto_cycle, false)
-        placeholder = typedArray.getResourceId(R.styleable.ImageSlider_placeholder, R.drawable.placeholder)
-        errorImage = typedArray.getResourceId(R.styleable.ImageSlider_error_image, R.drawable.error)
+        placeholder = typedArray.getResourceId(R.styleable.ImageSlider_placeholder, R.drawable.gradient)
+        errorImage = typedArray.getResourceId(R.styleable.ImageSlider_error_image, R.drawable.gradient)
         selectedDot = typedArray.getResourceId(R.styleable.ImageSlider_selected_dot, R.drawable.default_selected_dot)
         unselectedDot =
             typedArray.getResourceId(R.styleable.ImageSlider_unselected_dot, R.drawable.default_unselected_dot)
