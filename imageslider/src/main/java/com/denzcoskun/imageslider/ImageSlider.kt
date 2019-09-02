@@ -78,34 +78,46 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
     }
 
     fun setupDots(size: Int) {
-        pagerDots!!.removeAllViews()
-        dots = arrayOfNulls(size)
+        if(size > 1) {
+            pagerDots!!.removeAllViews()
+            dots = arrayOfNulls(size)
 
-        for (i in 0 until size) {
-            dots!![i] = ImageView(context)
-            dots!![i]!!.setImageDrawable(ContextCompat.getDrawable(context, unselectedDot))
-            val params = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            params.setMargins(8, 0, 8, 0)
-            pagerDots!!.addView(dots!![i], params)
-        }
-        dots!![0]!!.setImageDrawable(ContextCompat.getDrawable(context, selectedDot))
-
-        viewPager!!.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
-
-            override fun onPageSelected(position: Int) {
-                currentPage = position
-                for (dot in dots!!) {
-                    dot!!.setImageDrawable(ContextCompat.getDrawable(context, unselectedDot))
-                }
-                dots!![position]!!.setImageDrawable(ContextCompat.getDrawable(context, selectedDot))
+            for (i in 0 until size) {
+                dots!![i] = ImageView(context)
+                dots!![i]!!.setImageDrawable(ContextCompat.getDrawable(context, unselectedDot))
+                val params = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+                params.setMargins(8, 0, 8, 0)
+                pagerDots!!.addView(dots!![i], params)
             }
+            dots!![0]!!.setImageDrawable(ContextCompat.getDrawable(context, selectedDot))
 
-            override fun onPageScrollStateChanged(state: Int) {}
-        })
+            viewPager!!.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int
+                ) {
+                }
+
+                override fun onPageSelected(position: Int) {
+                    currentPage = position
+                    for (dot in dots!!) {
+                        dot!!.setImageDrawable(ContextCompat.getDrawable(context, unselectedDot))
+                    }
+                    dots!![position]!!.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            context,
+                            selectedDot
+                        )
+                    )
+                }
+
+                override fun onPageScrollStateChanged(state: Int) {}
+            })
+        }
     }
 
     fun autoSliding() {
