@@ -36,14 +36,14 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
     private var unselectedDot = 0
     private var errorImage = 0
     private var placeholder = 0
+    private var swipeTimer = Timer()
 
     init {
         LayoutInflater.from(getContext()).inflate(R.layout.image_slider, this, true)
         viewPager = findViewById(R.id.view_pager)
         pagerDots = findViewById(R.id.pager_dots)
 
-        val typedArray =
-            context.theme.obtainStyledAttributes(attrs, R.styleable.ImageSlider, defStyleAttr, defStyleAttr)
+        val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.ImageSlider, defStyleAttr, defStyleAttr)
 
         cornerRadius = typedArray.getInt(R.styleable.ImageSlider_corner_radius, 0)
         period = typedArray.getInt(R.styleable.ImageSlider_period, 1000).toLong()
@@ -52,8 +52,7 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
         placeholder = typedArray.getResourceId(R.styleable.ImageSlider_placeholder, R.drawable.placeholder)
         errorImage = typedArray.getResourceId(R.styleable.ImageSlider_error_image, R.drawable.error)
         selectedDot = typedArray.getResourceId(R.styleable.ImageSlider_selected_dot, R.drawable.default_selected_dot)
-        unselectedDot =
-            typedArray.getResourceId(R.styleable.ImageSlider_unselected_dot, R.drawable.default_unselected_dot)
+        unselectedDot = typedArray.getResourceId(R.styleable.ImageSlider_unselected_dot, R.drawable.default_unselected_dot)
 
     }
 
@@ -63,7 +62,7 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
         imageCount = imageList.size
         setupDots(imageList.size)
         if (autoCycle) {
-            autoSliding()
+            startSliding()
         }
     }
 
@@ -73,7 +72,7 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
         imageCount = imageList.size
         setupDots(imageList.size)
         if (autoCycle) {
-            autoSliding()
+            startSliding()
         }
     }
 
@@ -108,18 +107,27 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
         })
     }
 
-    fun autoSliding() {
+    fun startSliding(changeablePeriod: Long = period) {
+        scheduleTimer(changeablePeriod)
+    }
+
+    fun stopSliding(){
+        swipeTimer.cancel()
+        swipeTimer.purge()
+    }
+
+    private fun scheduleTimer(period: Long) {
         val handler = Handler()
-        val Update = Runnable {
+        val update = Runnable {
             if (currentPage == imageCount) {
                 currentPage = 0
             }
             viewPager!!.setCurrentItem(currentPage++, true)
         }
-        val swipeTimer = Timer()
+        swipeTimer = Timer()
         swipeTimer.schedule(object : TimerTask() {
             override fun run() {
-                handler.post(Update)
+                handler.post(update)
             }
         }, delay, period)
     }
