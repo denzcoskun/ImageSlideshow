@@ -56,27 +56,19 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
     }
 
-    fun setImageList(imageList: List<SlideModel>) {
-        viewPagerAdapter = ViewPagerAdapter(context, imageList, cornerRadius, errorImage, placeholder, false)
-        viewPager!!.adapter = viewPagerAdapter
-        imageCount = imageList.size
-        setupDots(imageList.size)
-        if (autoCycle) {
-            startSliding()
-        }
-    }
-
-    fun setImageList(imageList: List<SlideModel>, centerCrop: Boolean) {
+    fun setImageList(imageList: List<SlideModel>, centerCrop: Boolean = false) {
         viewPagerAdapter = ViewPagerAdapter(context, imageList, cornerRadius, errorImage, placeholder, centerCrop)
         viewPager!!.adapter = viewPagerAdapter
         imageCount = imageList.size
-        setupDots(imageList.size)
-        if (autoCycle) {
-            startSliding()
+        if (imageList.size > 1){
+            setupDots(imageList.size)
+            if (autoCycle) {
+                startSliding()
+            }
         }
     }
 
-    fun setupDots(size: Int) {
+    private fun setupDots(size: Int) {
         pagerDots!!.removeAllViews()
         dots = arrayOfNulls(size)
 
