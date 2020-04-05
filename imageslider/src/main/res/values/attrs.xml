@@ -5,9 +5,12 @@
         <attr name="corner_radius" format="integer" />
         <attr name="period" format="integer" />
         <attr name="delay" format="integer" />
+        <attr name="show_dots_background" format="boolean" />
+        <attr name="dots_background_padding" format="dimension" />
         <attr name="placeholder" format="reference" />
         <attr name="error_image" format="reference" />
         <attr name="selected_dot" format="reference" />
         <attr name="unselected_dot" format="reference" />
+        <attr name="dots_background" format="reference" />
     </declare-styleable>
 </resources>

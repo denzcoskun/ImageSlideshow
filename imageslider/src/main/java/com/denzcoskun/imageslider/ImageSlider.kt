@@ -34,6 +34,9 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
     private var selectedDot = 0
     private var unselectedDot = 0
+    private var dotsBackground = 0
+    private var dotsBackgroundPadding = 0
+    private var showDotsBackground = false
     private var errorImage = 0
     private var placeholder = 0
     private var swipeTimer = Timer()
@@ -53,6 +56,9 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
         errorImage = typedArray.getResourceId(R.styleable.ImageSlider_error_image, R.drawable.error)
         selectedDot = typedArray.getResourceId(R.styleable.ImageSlider_selected_dot, R.drawable.default_selected_dot)
         unselectedDot = typedArray.getResourceId(R.styleable.ImageSlider_unselected_dot, R.drawable.default_unselected_dot)
+        dotsBackground = typedArray.getResourceId(R.styleable.ImageSlider_dots_background, R.drawable.default_dots_background)
+        showDotsBackground = typedArray.getBoolean(R.styleable.ImageSlider_show_dots_background, false)
+        dotsBackgroundPadding = typedArray.getDimension(R.styleable.ImageSlider_dots_background_padding, 0f).toInt()
 
     }
 
@@ -83,7 +89,6 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
             pagerDots!!.addView(dots!![i], params)
         }
         dots!![0]!!.setImageDrawable(ContextCompat.getDrawable(context, selectedDot))
-
         viewPager!!.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
@@ -97,6 +102,12 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
             override fun onPageScrollStateChanged(state: Int) {}
         })
+
+
+        if(showDotsBackground){
+            pagerDots?.setBackgroundResource(dotsBackground)
+            pagerDots?.setPadding(dotsBackgroundPadding,dotsBackgroundPadding,dotsBackgroundPadding,dotsBackgroundPadding)
+        }
     }
 
     fun startSliding(changeablePeriod: Long = period) {
