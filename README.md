@@ -7,12 +7,12 @@
 <p>You can also add the title you want to the images.</p>
 <p>You can set corner radius images.</p>
 <p>You can use with Java or Kotlin.</p>
-</br>
+</br></br>
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/db19e5bd13bb4396a4adcbc1954325cc)](https://www.codacy.com/manual/denzcoskun/ImageSlideshow?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=denzcoskun/ImageSlideshow&amp;utm_campaign=Badge_Grade)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-ImageSlideshow-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7587)
 [![license](https://img.shields.io/github/license/denzcoskun/imageslideshow.svg?style=popout)](https://opensource.org/licenses/Apache-2.0)
 [![](https://jitpack.io/v/denzcoskun/ImageSlideshow.svg)](https://jitpack.io/#denzcoskun/ImageSlideshow)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/db19e5bd13bb4396a4adcbc1954325cc)](https://www.codacy.com/manual/denzcoskun/ImageSlideshow?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=denzcoskun/ImageSlideshow&amp;utm_campaign=Badge_Grade)
 
 ## Usage
 
