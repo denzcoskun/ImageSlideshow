@@ -8,6 +8,7 @@
 <p>You can set corner radius images.</p>
 </br>
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5a71b0517b1a4ad09136e376f89b7054)](https://app.codacy.com/manual/denzcoskun/ImageSlideshow?utm_source=github.com&utm_medium=referral&utm_content=denzcoskun/ImageSlideshow&utm_campaign=Badge_Grade_Dashboard)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-ImageSlideshow-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7587)
 [![license](https://img.shields.io/github/license/denzcoskun/imageslideshow.svg?style=popout)](https://opensource.org/licenses/Apache-2.0)
 [![](https://jitpack.io/v/denzcoskun/ImageSlideshow.svg)](https://jitpack.io/#denzcoskun/ImageSlideshow)
