@@ -35,7 +35,6 @@
 
 -   You can change error image.
 
-
 ```xml
  app:iss_error_image="@drawable/error"
 ```
@@ -89,7 +88,6 @@ imageSlider.setImageList(imageList, ScaleTypes.FIT) // for all images
 ```
 
 -   You can use click listener.
-
 
 ```kt
 imageSlider.setItemClickListener(object : ItemClickListener {
