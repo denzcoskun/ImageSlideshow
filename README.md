@@ -16,7 +16,7 @@
 ## Usage
 
 
-- Add ImageSlider to your **layout**
+-   Add ImageSlider to your **layout**
 
 
 ```xml
@@ -29,21 +29,21 @@
         app:iss_delay="0"/>
 ```
 
-- You can change placeholder image.
+-   You can change placeholder image.
 
 
 ```xml
  app:iss_placeholder="@drawable/placeholder"
 ```
 
-- You can change error image.
+-   You can change error image.
 
 
 ```xml
  app:iss_error_image="@drawable/error"
 ```
 
-- You can change indicators.
+-   You can change indicators.
 
 
 ```xml
@@ -51,7 +51,7 @@ app:iss_selected_dot="@drawable/default_selected_dot"
 app:iss_unselected_dot="@drawable/default_unselected_dot"
 ```
 
-- Add ImageSlider to your **Activity**
+-   Add ImageSlider to your **Activity**
 
 
 ```kt
@@ -68,7 +68,7 @@ val imageSlider = findViewById<ImageSlider>(R.id.image_slider)
 imageSlider.setImageList(imageList)
 ```
 
-- You can change scaleType for all images or one image.
+-   You can change scaleType for all images or one image.
 
 <img src="https://user-images.githubusercontent.com/15522554/85434498-d0209080-b58e-11ea-83cc-ce79076391c1.jpg">
 
@@ -83,7 +83,7 @@ imageList.add(SlideModel("String Url" or R.drawable, "Title", ScaleTypes.FIT) //
 imageSlider.setImageList(imageList, ScaleTypes.FIT) // for all images
 ```
 
-- You can change title background on xml.
+-   You can change title background on xml.
 
 
 <img src="https://user-images.githubusercontent.com/15522554/85441920-4b3a7480-b598-11ea-9154-338a8577552b.jpg">
@@ -105,7 +105,7 @@ imageSlider.setItemClickListener(object : ItemClickListener {
 })
 ```
 
-- You can add stop and start auto sliding again.
+-   You can add stop and start auto sliding again.
 
 
 ```kt
