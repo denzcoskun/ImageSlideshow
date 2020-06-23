@@ -3,7 +3,9 @@ package com.denzcoskun.imageslider.models
 import com.denzcoskun.imageslider.constants.ScaleTypes
 
 /**
- * Created by 34158 on 22.03.2019.
+ * Created by Deniz Coşkun on 6/23/2020.
+ * denzcoskun@hotmail.com
+ * İstanbul
  */
 class SlideModel {
 

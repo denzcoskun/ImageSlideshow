@@ -3,12 +3,21 @@ package com.denzcoskun.imageslider.transformation
 import android.graphics.*
 import com.squareup.picasso.Transformation
 
+/**
+ * Created by Name name on 6/23/2020.
+ * denzcoskun@hotmail.com
+ * İstanbul
+ */
 class RoundedTransformation @JvmOverloads constructor(radius:Int, margin:Int, cornerType:CornerType = CornerType.ALL):
     Transformation {
     private var mRadius:Float = 0f
     private var mDiameter:Float = 0f
     private var mMargin:Float = 0f
     private var mCornerType:CornerType
+
+    /**
+     * Enum for corner types.
+     */
     enum class CornerType {
         ALL,
         TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT,

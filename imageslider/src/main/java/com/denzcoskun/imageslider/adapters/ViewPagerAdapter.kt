@@ -17,7 +17,11 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.denzcoskun.imageslider.transformation.RoundedTransformation
 import com.squareup.picasso.Picasso
 
-
+/**
+ * Created by Deniz Coşkun on 6/23/2020.
+ * denzcoskun@hotmail.com
+ * İstanbul
+ */
 class ViewPagerAdapter(context: Context?,
                        imageList: List<SlideModel>,
                        private var radius: Int,
@@ -25,7 +29,7 @@ class ViewPagerAdapter(context: Context?,
                        private var placeholder: Int,
                        private var titleBackground: Int,
                        private var scaleType: ScaleTypes?,
-                        private var textAlign: String) : PagerAdapter() {
+                       private var textAlign: String) : PagerAdapter() {
 
     private var imageList: List<SlideModel>? = imageList
     private var layoutInflater: LayoutInflater? = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater?
@@ -84,6 +88,11 @@ class ViewPagerAdapter(context: Context?,
         return itemView
     }
 
+    /**
+     * Get layout gravity value from textAlign variable
+     *
+     * @param  textAlign  text align by user
+     */
     fun getGravityFromAlign(textAlign: String): Int {
         return when (textAlign) {
             "RIGHT" -> {
@@ -98,6 +107,11 @@ class ViewPagerAdapter(context: Context?,
         }
     }
 
+    /**
+     * Set item click listener
+     *
+     * @param  itemClickListener  callback by user
+     */
     fun setItemClickListener(itemClickListener: ItemClickListener) {
         this.itemClickListener = itemClickListener
     }

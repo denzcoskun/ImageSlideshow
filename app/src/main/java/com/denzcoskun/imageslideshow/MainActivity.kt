@@ -7,8 +7,13 @@ import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
 
-class MainActivity : AppCompatActivity() {
+/**
+ * Created by Deniz Coşkun on 6/23/2020.
+ * denzcoskun@hotmail.com
+ * İstanbul
+ */
 
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

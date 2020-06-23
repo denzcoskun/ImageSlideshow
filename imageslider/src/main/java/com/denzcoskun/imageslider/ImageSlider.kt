@@ -5,7 +5,7 @@ import android.os.Handler
 import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager
 import android.util.AttributeSet
-import android.view.Gravity
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -16,7 +16,11 @@ import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
 import java.util.*
 
-
+/**
+ * Created by Name name on 6/23/2020.
+ * denzcoskun@hotmail.com
+ * İstanbul
+ */
 class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
     RelativeLayout(context, attrs, defStyleAttr) {
 
@@ -63,6 +67,12 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
         }
     }
 
+    /**
+     * Set image list to adapter.
+     *
+     * @param  imageList  the image list by user
+     * @param  scaleType  scale type for all image
+     */
     fun setImageList(imageList: List<SlideModel>, scaleType: ScaleTypes? = null) {
         viewPagerAdapter = ViewPagerAdapter(context, imageList, cornerRadius, errorImage, placeholder, titleBackground, scaleType, textAlign)
         viewPager!!.adapter = viewPagerAdapter
@@ -92,7 +102,8 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
         dots!![0]!!.setImageDrawable(ContextCompat.getDrawable(context, selectedDot))
 
         viewPager!!.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) { Log.d("Tag", position.toString()) }
 
             override fun onPageSelected(position: Int) {
                 currentPage = position
@@ -102,14 +113,23 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
                 dots!![position]!!.setImageDrawable(ContextCompat.getDrawable(context, selectedDot))
             }
 
-            override fun onPageScrollStateChanged(state: Int) {}
+            override fun onPageScrollStateChanged(state: Int) { Log.d("Tag", state.toString()) }
         })
     }
 
+    /**
+     * Start image sliding.
+     *
+     * @param  changeablePeriod  optional period value
+     */
     fun startSliding(changeablePeriod: Long = period) {
         scheduleTimer(changeablePeriod)
     }
 
+    /**
+     * Stop image sliding.
+     *
+     */
     fun stopSliding(){
         swipeTimer.cancel()
         swipeTimer.purge()
@@ -131,6 +151,11 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
         }, delay, period)
     }
 
+    /**
+     * Set item click listener for listen to image click
+     *
+     * @param  itemClickListener  interface callback
+     */
     fun setItemClickListener(itemClickListener: ItemClickListener) {
         viewPagerAdapter?.setItemClickListener(itemClickListener)
     }
