@@ -1,5 +1,7 @@
 package com.denzcoskun.imageslider.models
 
+import com.denzcoskun.imageslider.constants.ScaleTypes
+
 /**
  * Created by 34158 on 22.03.2019.
  */
@@ -8,46 +10,28 @@ class SlideModel {
     var imageUrl: String? = null
     var imagePath: Int? = 0
     var title: String? = null
-    var centerCrop = false
+    var scaleType: ScaleTypes? = null
 
-    constructor (imageUrl: String) {
-        this.imageUrl = imageUrl
-    }
-
-    constructor (imagePath: Int) {
-        this.imagePath = imagePath
-    }
-
-    constructor (imageUrl: String, title: String?) {
+    constructor(imageUrl: String?, title: String? = null, scaleType: ScaleTypes?  = null) {
         this.imageUrl = imageUrl
         this.title = title
+        this.scaleType = scaleType
     }
 
-    constructor (imagePath: Int, title: String?) {
+    constructor(imagePath: Int?, title: String?  = null, scaleType: ScaleTypes?  = null) {
         this.imagePath = imagePath
         this.title = title
+        this.scaleType = scaleType
     }
 
-    constructor (imageUrl: String, centerCrop: Boolean) {
+    constructor(imageUrl: String?, scaleType: ScaleTypes?) {
         this.imageUrl = imageUrl
-        this.centerCrop = centerCrop
+        this.scaleType = scaleType
     }
 
-    constructor (imagePath: Int, centerCrop: Boolean) {
+    constructor(imagePath: Int?, scaleType: ScaleTypes?) {
         this.imagePath = imagePath
-        this.centerCrop = centerCrop
-    }
-
-    constructor (imagePath: Int, title: String?, centerCrop: Boolean) {
-        this.imagePath = imagePath
-        this.title = title
-        this.centerCrop = centerCrop
-    }
-
-    constructor (imageUrl: String, title: String?, centerCrop: Boolean) {
-        this.imageUrl = imageUrl
-        this.title = title
-        this.centerCrop = centerCrop
+        this.scaleType = scaleType
     }
 
 }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ImageSlider</string>
+    <string name="left">LEFT</string>
 </resources>

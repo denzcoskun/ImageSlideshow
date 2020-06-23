@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="ImageSlider">
-        <attr name="auto_cycle" format="boolean" />
-        <attr name="corner_radius" format="integer" />
-        <attr name="period" format="integer" />
-        <attr name="delay" format="integer" />
-        <attr name="placeholder" format="reference" />
-        <attr name="error_image" format="reference" />
-        <attr name="selected_dot" format="reference" />
-        <attr name="unselected_dot" format="reference" />
+        <attr name="iss_auto_cycle" format="boolean" />
+        <attr name="iss_corner_radius" format="integer" />
+        <attr name="iss_period" format="integer" />
+        <attr name="iss_delay" format="integer" />
+        <attr name="iss_placeholder" format="reference" />
+        <attr name="iss_error_image" format="reference" />
+        <attr name="iss_selected_dot" format="reference" />
+        <attr name="iss_unselected_dot" format="reference" />
+        <attr name="iss_title_background" format="reference" />
+        <attr name="iss_text_align" format="string"/>
     </declare-styleable>
 </resources>

@@ -1,40 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:padding="10dp"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:background="#505050"
-              android:layout_height="match_parent"
-              tools:context=".MainActivity">
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="#505050"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
 
     <com.denzcoskun.imageslider.ImageSlider
-        android:id="@+id/image_slider"
-        android:layout_width="wrap_content"
-        android:layout_height="300dp"
-        app:auto_cycle="true"
-        app:corner_radius="20"
-        app:period="1000"
-        app:delay="0"
-        app:error_image="@drawable/error"
-        app:selected_dot="@drawable/default_selected_dot"
-        app:unselected_dot="@drawable/default_unselected_dot" />
-
-    <LinearLayout android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp">
-            <Button android:id="@+id/start_button"
-                    android:text="@string/start"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-            </Button>
-            <Button android:id="@+id/stop_button"
-                    android:text="@string/stop"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-            </Button>
-    </LinearLayout>
+            android:id="@+id/image_slider"
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            app:iss_auto_cycle="false"
+            app:iss_period="1500"
+            app:iss_delay="0"
+            app:iss_text_align="CENTER"
+            app:iss_title_background="@drawable/gradient"
+            app:iss_error_image="@drawable/error"
+            app:iss_selected_dot="@drawable/default_selected_dot"
+            app:iss_unselected_dot="@drawable/default_unselected_dot"/>
 
 </LinearLayout>

@@ -1,7 +1,7 @@
 package com.denzcoskun.imageslider.adapters
 
 import android.content.Context
-import android.support.v4.view.PagerAdapter
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +9,23 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.viewpager.widget.PagerAdapter
 import com.denzcoskun.imageslider.R
+import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
 import com.denzcoskun.imageslider.transformation.RoundedTransformation
 import com.squareup.picasso.Picasso
 
 
-class ViewPagerAdapter(context: Context?, imageList: List<SlideModel>, private var radius: Int, private var errorImage: Int, private var placeholder: Int, private var centerCrop: Boolean?) : PagerAdapter() {
+class ViewPagerAdapter(context: Context?,
+                       imageList: List<SlideModel>,
+                       private var radius: Int,
+                       private var errorImage: Int,
+                       private var placeholder: Int,
+                       private var titleBackground: Int,
+                       private var scaleType: ScaleTypes?,
+                        private var textAlign: String) : PagerAdapter() {
 
     private var imageList: List<SlideModel>? = imageList
     private var layoutInflater: LayoutInflater? = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater?
@@ -32,7 +41,6 @@ class ViewPagerAdapter(context: Context?, imageList: List<SlideModel>, private v
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): View{
-
         val itemView = layoutInflater!!.inflate(R.layout.pager_row, container, false)
 
         val imageView = itemView.findViewById<ImageView>(R.id.image_view)
@@ -41,55 +49,53 @@ class ViewPagerAdapter(context: Context?, imageList: List<SlideModel>, private v
 
         if (imageList!![position].title != null){
             textView.text = imageList!![position].title
+            linearLayout.setBackgroundResource(titleBackground)
+            textView.gravity = getGravityFromAlign(textAlign)
+            linearLayout.gravity = getGravityFromAlign(textAlign)
         }else{
             linearLayout.visibility = View.INVISIBLE
         }
 
-        if(imageList!![position].imageUrl == null){
-            if(centerCrop!! || imageList!![position].centerCrop){
-                Picasso.get()
-                    .load(imageList!![position].imagePath!!) // Int
-                    .fit()
-                    .centerCrop()
-                    .transform(RoundedTransformation(radius,0))
-                    .placeholder(placeholder)
-                    .error(errorImage)
-                    .into(imageView)
-            }else {
-                Picasso.get()
-                    .load(imageList!![position].imagePath!!) // Int
-                    .fit()
-                    .transform(RoundedTransformation(radius, 0))
-                    .placeholder(placeholder)
-                    .error(errorImage)
-                    .into(imageView)
-            }
+        // Image from url or local path check.
+        val loader = if (imageList!![position].imageUrl == null){
+            Picasso.get().load(imageList!![position].imagePath!!)
         }else{
-            if(centerCrop!! || imageList!![position].centerCrop) {
-                Picasso.get()
-                    .load(imageList!![position].imageUrl!!) // String
-                    .fit()
-                    .centerCrop()
-                    .transform(RoundedTransformation(radius, 0))
-                    .placeholder(placeholder)
-                    .error(errorImage)
-                    .into(imageView)
-            }else {
-                Picasso.get()
-                    .load(imageList!![position].imageUrl!!) // String
-                    .fit()
-                    .transform(RoundedTransformation(radius, 0))
-                    .placeholder(placeholder)
-                    .error(errorImage)
-                    .into(imageView)
-            }
+            Picasso.get().load(imageList!![position].imageUrl!!)
         }
+
+        // set Picasso options.
+        if ((scaleType != null && scaleType == ScaleTypes.CENTER_CROP) || imageList!![position].scaleType == ScaleTypes.CENTER_CROP){
+            loader.fit().centerCrop()
+        } else if((scaleType != null && scaleType == ScaleTypes.CENTER_INSIDE) || imageList!![position].scaleType == ScaleTypes.CENTER_INSIDE){
+            loader.fit().centerInside()
+        }else if((scaleType != null && scaleType == ScaleTypes.FIT) || imageList!![position].scaleType == ScaleTypes.FIT){
+            loader.fit()
+        }
+
+        loader.transform(RoundedTransformation(radius, 0))
+            .placeholder(placeholder)
+            .error(errorImage)
+            .into(imageView)
 
         container.addView(itemView)
 
         imageView.setOnClickListener{itemClickListener?.onItemSelected(position)}
 
         return itemView
+    }
+
+    fun getGravityFromAlign(textAlign: String): Int {
+        return when (textAlign) {
+            "RIGHT" -> {
+                Gravity.RIGHT
+            }
+            "CENTER" -> {
+                Gravity.CENTER
+            }
+            else -> {
+                Gravity.LEFT
+            }
+        }
     }
 
     fun setItemClickListener(itemClickListener: ItemClickListener) {

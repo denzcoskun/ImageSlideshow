@@ -7,15 +7,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     <LinearLayout
-        android:id="@+id/linear_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:paddingBottom="40dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="5dp"
-        android:background="@drawable/gradient">
+            android:id="@+id/linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="40dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:background="@drawable/gradient"
+            android:paddingTop="5dp">
         <TextView
                 android:id="@+id/text_view"
                 android:textColor="@android:color/white"

@@ -2,14 +2,16 @@ package com.denzcoskun.imageslider
 
 import android.content.Context
 import android.os.Handler
-import android.support.v4.content.ContextCompat
-import android.support.v4.view.ViewPager
+import androidx.core.content.ContextCompat
+import androidx.viewpager.widget.ViewPager
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import com.denzcoskun.imageslider.adapters.ViewPagerAdapter
+import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
 import java.util.*
@@ -36,6 +38,8 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
     private var unselectedDot = 0
     private var errorImage = 0
     private var placeholder = 0
+    private var titleBackground = 0
+    private var textAlign = "LEFT"
     private var swipeTimer = Timer()
 
     init {
@@ -45,19 +49,22 @@ class ImageSlider @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.ImageSlider, defStyleAttr, defStyleAttr)
 
-        cornerRadius = typedArray.getInt(R.styleable.ImageSlider_corner_radius, 0)
-        period = typedArray.getInt(R.styleable.ImageSlider_period, 1000).toLong()
-        delay = typedArray.getInt(R.styleable.ImageSlider_delay, 1000).toLong()
-        autoCycle = typedArray.getBoolean(R.styleable.ImageSlider_auto_cycle, false)
-        placeholder = typedArray.getResourceId(R.styleable.ImageSlider_placeholder, R.drawable.placeholder)
-        errorImage = typedArray.getResourceId(R.styleable.ImageSlider_error_image, R.drawable.error)
-        selectedDot = typedArray.getResourceId(R.styleable.ImageSlider_selected_dot, R.drawable.default_selected_dot)
-        unselectedDot = typedArray.getResourceId(R.styleable.ImageSlider_unselected_dot, R.drawable.default_unselected_dot)
-
+        cornerRadius = typedArray.getInt(R.styleable.ImageSlider_iss_corner_radius, 1)
+        period = typedArray.getInt(R.styleable.ImageSlider_iss_period, 1000).toLong()
+        delay = typedArray.getInt(R.styleable.ImageSlider_iss_delay, 1000).toLong()
+        autoCycle = typedArray.getBoolean(R.styleable.ImageSlider_iss_auto_cycle, false)
+        placeholder = typedArray.getResourceId(R.styleable.ImageSlider_iss_placeholder, R.drawable.loading)
+        errorImage = typedArray.getResourceId(R.styleable.ImageSlider_iss_error_image, R.drawable.error)
+        selectedDot = typedArray.getResourceId(R.styleable.ImageSlider_iss_selected_dot, R.drawable.default_selected_dot)
+        unselectedDot = typedArray.getResourceId(R.styleable.ImageSlider_iss_unselected_dot, R.drawable.default_unselected_dot)
+        titleBackground = typedArray.getResourceId(R.styleable.ImageSlider_iss_title_background, R.drawable.gradient)
+        if (typedArray.getString(R.styleable.ImageSlider_iss_text_align) != null){
+            textAlign = typedArray.getString(R.styleable.ImageSlider_iss_text_align)
+        }
     }
 
-    fun setImageList(imageList: List<SlideModel>, centerCrop: Boolean = false) {
-        viewPagerAdapter = ViewPagerAdapter(context, imageList, cornerRadius, errorImage, placeholder, centerCrop)
+    fun setImageList(imageList: List<SlideModel>, scaleType: ScaleTypes? = null) {
+        viewPagerAdapter = ViewPagerAdapter(context, imageList, cornerRadius, errorImage, placeholder, titleBackground, scaleType, textAlign)
         viewPager!!.adapter = viewPagerAdapter
         imageCount = imageList.size
         if (imageList.size > 1){
