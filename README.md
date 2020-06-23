@@ -99,7 +99,6 @@ imageSlider.setItemClickListener(object : ItemClickListener {
 
 -   You can add stop and start auto sliding again.
 
-
 ```kt
 imageSlider.startSliding(3000) // with new period
 imageSlider.startSliding()
@@ -107,7 +106,6 @@ imageSlider.stopSliding()
 ```
 
 ## Setup
-
 
 ```xml
 allprojects {
