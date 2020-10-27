@@ -117,7 +117,7 @@ allprojects {
 }
 
 dependencies {
-	implementation 'com.github.denzcoskun:ImageSlideshow:0.0.7'
+	implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
 }
 ```
 
