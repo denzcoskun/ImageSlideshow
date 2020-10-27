@@ -89,14 +89,17 @@ class ViewPagerAdapter(context: Context?,
 
         imageView.setOnClickListener{itemClickListener?.onItemSelected(position)}
 
-        imageView!!.setOnTouchListener { v, event ->
-            when (event.action) {
-                MotionEvent.ACTION_MOVE -> touchListener!!.onTouched(ActionTypes.MOVE)
-                MotionEvent.ACTION_DOWN -> touchListener!!.onTouched(ActionTypes.DOWN)
-                MotionEvent.ACTION_UP -> touchListener!!.onTouched(ActionTypes.UP)
+        if (touchListener != null){
+            imageView!!.setOnTouchListener { v, event ->
+                when (event.action) {
+                    MotionEvent.ACTION_MOVE -> touchListener!!.onTouched(ActionTypes.MOVE)
+                    MotionEvent.ACTION_DOWN -> touchListener!!.onTouched(ActionTypes.DOWN)
+                    MotionEvent.ACTION_UP -> touchListener!!.onTouched(ActionTypes.UP)
+                }
+                false
             }
-            false
         }
+
 
         return itemView
     }

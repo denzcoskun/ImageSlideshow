@@ -88,14 +88,17 @@ class ImageSlider @JvmOverloads constructor(
             indicatorAlign = typedArray.getString(R.styleable.ImageSlider_iss_indicator_align)
         }
 
-        viewPager!!.setOnTouchListener { v, event ->
-            when (event.action) {
-                MotionEvent.ACTION_MOVE -> touchListener!!.onTouched(ActionTypes.MOVE)
-                MotionEvent.ACTION_DOWN -> touchListener!!.onTouched(ActionTypes.DOWN)
-                MotionEvent.ACTION_UP -> touchListener!!.onTouched(ActionTypes.UP)
+        if (touchListener != null){
+            viewPager!!.setOnTouchListener { v, event ->
+                when (event.action) {
+                    MotionEvent.ACTION_MOVE -> touchListener!!.onTouched(ActionTypes.MOVE)
+                    MotionEvent.ACTION_DOWN -> touchListener!!.onTouched(ActionTypes.DOWN)
+                    MotionEvent.ACTION_UP -> touchListener!!.onTouched(ActionTypes.UP)
+                }
+                false
             }
-            false
         }
+
     }
 
     /**
