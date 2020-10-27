@@ -167,7 +167,7 @@ class ImageSlider @JvmOverloads constructor(
                     dot!!.setImageDrawable(ContextCompat.getDrawable(context, unselectedDot))
                 }
                 dots!![position]!!.setImageDrawable(ContextCompat.getDrawable(context, selectedDot))
-                itemChangeListener!!.onItemChanged(position)
+                if (itemChangeListener != null) itemChangeListener!!.onItemChanged(position)
             }
 
             override fun onPageScrollStateChanged(state: Int) {}
