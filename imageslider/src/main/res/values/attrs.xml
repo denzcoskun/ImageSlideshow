@@ -11,5 +11,6 @@
         <attr name="iss_unselected_dot" format="reference" />
         <attr name="iss_title_background" format="reference" />
         <attr name="iss_text_align" format="string"/>
+        <attr name="iss_indicator_align" format="string"/>
     </declare-styleable>
 </resources>

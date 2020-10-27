@@ -1,18 +1,18 @@
 package com.denzcoskun.imageslider.adapters
 
 import android.content.Context
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
 import com.denzcoskun.imageslider.R
+import com.denzcoskun.imageslider.constants.ActionTypes
 import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.interfaces.ItemChangeListener
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
+import com.denzcoskun.imageslider.interfaces.TouchListener
 import com.denzcoskun.imageslider.models.SlideModel
 import com.denzcoskun.imageslider.transformation.RoundedTransformation
 import com.squareup.picasso.Picasso
@@ -31,10 +31,14 @@ class ViewPagerAdapter(context: Context?,
                        private var scaleType: ScaleTypes?,
                        private var textAlign: String) : PagerAdapter() {
 
+    constructor(context: Context, imageList: List<SlideModel>, radius: Int, errorImage: Int, placeholder: Int, titleBackground: Int, textAlign: String) :
+            this(context, imageList, radius, errorImage, placeholder, titleBackground, null, textAlign)
+
     private var imageList: List<SlideModel>? = imageList
     private var layoutInflater: LayoutInflater? = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater?
 
     private var itemClickListener: ItemClickListener? = null
+    private var touchListener: TouchListener? = null
 
     override fun isViewFromObject(view: View, obj: Any): Boolean {
         return view == obj
@@ -85,6 +89,15 @@ class ViewPagerAdapter(context: Context?,
 
         imageView.setOnClickListener{itemClickListener?.onItemSelected(position)}
 
+        imageView!!.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_MOVE -> touchListener!!.onTouched(ActionTypes.MOVE)
+                MotionEvent.ACTION_DOWN -> touchListener!!.onTouched(ActionTypes.DOWN)
+                MotionEvent.ACTION_UP -> touchListener!!.onTouched(ActionTypes.UP)
+            }
+            false
+        }
+
         return itemView
     }
 
@@ -114,6 +127,15 @@ class ViewPagerAdapter(context: Context?,
      */
     fun setItemClickListener(itemClickListener: ItemClickListener) {
         this.itemClickListener = itemClickListener
+    }
+
+    /**
+     * Set touch listener for listen to image touch
+     *
+     * @param  touchListener  interface callback
+     */
+    fun setTouchListener(touchListener: TouchListener) {
+        this.touchListener = touchListener
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {

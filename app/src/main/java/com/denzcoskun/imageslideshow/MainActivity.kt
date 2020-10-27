@@ -1,10 +1,15 @@
 package com.denzcoskun.imageslideshow
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.denzcoskun.imageslider.ImageSlider
+import com.denzcoskun.imageslider.constants.ActionTypes
 import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.interfaces.ItemChangeListener
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
+import com.denzcoskun.imageslider.interfaces.TouchListener
 import com.denzcoskun.imageslider.models.SlideModel
 
 /**
@@ -34,6 +39,21 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        imageSlider.setItemChangeListener(object : ItemChangeListener {
+            override fun onItemChanged(position: Int) {
+                //println("Pos: " + position)
+            }
+        })
+
+        imageSlider.setTouchListener(object : TouchListener {
+            override fun onTouched(touched: ActionTypes) {
+                if (touched == ActionTypes.DOWN){
+                    imageSlider.stopSliding()
+                } else if (touched == ActionTypes.UP ) {
+                   imageSlider.startSliding(1000)
+                }
+            }
+        })
     }
 
 }
