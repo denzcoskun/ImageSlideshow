@@ -10,7 +10,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
-import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2;
 import com.denzcoskun.imageslider.adapters.ViewPagerAdapter
 import com.denzcoskun.imageslider.constants.ActionTypes
 import com.denzcoskun.imageslider.constants.ScaleTypes
@@ -32,7 +32,7 @@ class ImageSlider @JvmOverloads constructor(
 ) :
     RelativeLayout(context, attrs, defStyleAttr) {
 
-    private var viewPager: ViewPager? = null
+    private var viewPager: ViewPager2? = null
     private var pagerDots: LinearLayout? = null
     private var viewPagerAdapter: ViewPagerAdapter? = null
 
