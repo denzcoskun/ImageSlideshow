@@ -26,5 +26,20 @@
       <option name="name" value="MavenRepo" />
       <option name="url" value="https://repo.maven.apache.org/maven2/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="$USER_HOME$/Library/Android/sdk/extras/m2repository" />
+      <option name="name" value="$USER_HOME$/Library/Android/sdk/extras/m2repository" />
+      <option name="url" value="file:$USER_HOME$/Library/Android/sdk/extras/m2repository/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="$USER_HOME$/Library/Android/sdk/extras/android/m2repository" />
+      <option name="name" value="$USER_HOME$/Library/Android/sdk/extras/android/m2repository" />
+      <option name="url" value="file:$USER_HOME$/Library/Android/sdk/extras/android/m2repository/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="$USER_HOME$/Library/Android/sdk/extras/google/m2repository" />
+      <option name="name" value="$USER_HOME$/Library/Android/sdk/extras/google/m2repository" />
+      <option name="url" value="file:$USER_HOME$/Library/Android/sdk/extras/google/m2repository/" />
+    </remote-repository>
   </component>
 </project>

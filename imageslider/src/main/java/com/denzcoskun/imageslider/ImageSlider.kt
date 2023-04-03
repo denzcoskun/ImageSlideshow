@@ -1,5 +1,6 @@
 package com.denzcoskun.imageslider
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Handler
 import android.util.AttributeSet
@@ -12,7 +13,9 @@ import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager
 import com.denzcoskun.imageslider.adapters.ViewPagerAdapter
+import com.denzcoskun.imageslider.animations.*
 import com.denzcoskun.imageslider.constants.ActionTypes
+import com.denzcoskun.imageslider.constants.AnimationTypes
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.interfaces.ItemChangeListener
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
@@ -25,6 +28,7 @@ import java.util.*
  * denzcoskun@hotmail.com
  * İstanbul
  */
+@SuppressLint("ClickableViewAccessibility")
 class ImageSlider @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -58,6 +62,8 @@ class ImageSlider @JvmOverloads constructor(
     private var itemChangeListener: ItemChangeListener? = null
     private var touchListener: TouchListener? = null
 
+    private var noDots = false
+
     init {
         LayoutInflater.from(getContext()).inflate(R.layout.image_slider, this, true)
         viewPager = findViewById(R.id.view_pager)
@@ -79,6 +85,7 @@ class ImageSlider @JvmOverloads constructor(
         selectedDot = typedArray.getResourceId(R.styleable.ImageSlider_iss_selected_dot, R.drawable.default_selected_dot)
         unselectedDot = typedArray.getResourceId(R.styleable.ImageSlider_iss_unselected_dot, R.drawable.default_unselected_dot)
         titleBackground = typedArray.getResourceId(R.styleable.ImageSlider_iss_title_background, R.drawable.gradient)
+        noDots = typedArray.getBoolean(R.styleable.ImageSlider_iss_no_dots, false)
 
         if (typedArray.getString(R.styleable.ImageSlider_iss_text_align) != null){
             textAlign = typedArray.getString(R.styleable.ImageSlider_iss_text_align)
@@ -89,7 +96,7 @@ class ImageSlider @JvmOverloads constructor(
         }
 
         if (touchListener != null){
-            viewPager!!.setOnTouchListener { v, event ->
+            viewPager!!.setOnTouchListener { _, event ->
                 when (event.action) {
                     MotionEvent.ACTION_MOVE -> touchListener!!.onTouched(ActionTypes.MOVE)
                     MotionEvent.ACTION_DOWN -> touchListener!!.onTouched(ActionTypes.DOWN)
@@ -108,15 +115,7 @@ class ImageSlider @JvmOverloads constructor(
      */
     fun setImageList(imageList: List<SlideModel>) {
         viewPagerAdapter = ViewPagerAdapter( context, imageList, cornerRadius, errorImage, placeholder, titleBackground, textAlign)
-        viewPager!!.adapter = viewPagerAdapter
-        imageCount = imageList.size
-        if (imageList.isNotEmpty()){
-            setupDots(imageList.size)
-            if (autoCycle) {
-                stopSliding()
-                startSliding()
-            }
-        }
+        setAdapter(imageList)
     }
 
     /**
@@ -127,12 +126,65 @@ class ImageSlider @JvmOverloads constructor(
      */
     fun setImageList(imageList: List<SlideModel>, scaleType: ScaleTypes? = null) {
         viewPagerAdapter = ViewPagerAdapter( context, imageList, cornerRadius, errorImage, placeholder, titleBackground, scaleType, textAlign)
+        setAdapter(imageList)
+    }
+
+    private fun setAdapter(imageList: List<SlideModel>){
         viewPager!!.adapter = viewPagerAdapter
         imageCount = imageList.size
         if (imageList.isNotEmpty()){
-            setupDots(imageList.size)
+            if(!noDots){
+                setupDots(imageList.size)
+            }
             if (autoCycle) {
                 startSliding()
+            }
+        }
+    }
+
+    fun setSlideAnimation(animationType: AnimationTypes){
+        when (animationType) {
+            AnimationTypes.ZOOM_IN -> {
+                viewPager!!.setPageTransformer(true, ZoomIn())
+            }
+            AnimationTypes.ZOOM_OUT -> {
+                viewPager!!.setPageTransformer(true, ZoomOut())
+            }
+            AnimationTypes.DEPTH_SLIDE -> {
+                viewPager!!.setPageTransformer(true, DepthSlide())
+            }
+            AnimationTypes.CUBE_IN -> {
+                viewPager!!.setPageTransformer(true, CubeIn())
+            }
+            AnimationTypes.CUBE_OUT -> {
+                viewPager!!.setPageTransformer(true, CubeOut())
+            }
+            AnimationTypes.FLIP_HORIZONTAL -> {
+                viewPager!!.setPageTransformer(true, FlipHorizontal())
+            }
+            AnimationTypes.FLIP_VERTICAL -> {
+                viewPager!!.setPageTransformer(true, FlipVertical())
+            }
+            AnimationTypes.ROTATE_UP -> {
+                viewPager!!.setPageTransformer(true, RotateUp())
+            }
+            AnimationTypes.ROTATE_DOWN -> {
+                viewPager!!.setPageTransformer(true, RotateDown())
+            }
+            AnimationTypes.FOREGROUND_TO_BACKGROUND -> {
+                viewPager!!.setPageTransformer(true, ForegroundToBackground())
+            }
+            AnimationTypes.BACKGROUND_TO_FOREGROUND -> {
+                viewPager!!.setPageTransformer(true, BackgroundToForeground())
+            }
+            AnimationTypes.TOSS -> {
+                viewPager!!.setPageTransformer(true, Toss())
+            }
+            AnimationTypes.GATE -> {
+                viewPager!!.setPageTransformer(true, Gate())
+            }
+            else -> {
+                viewPager!!.setPageTransformer(true, FidgetSpinner())
             }
         }
     }
