@@ -2,8 +2,7 @@
 <img src="https://user-images.githubusercontent.com/15522554/54867096-7169d700-4d8d-11e9-8f9a-bee162a01427.png">
 </a>
 <a href="https://github.com/denzcoskun/ImageSlideshow">
-<img align="left" src="https://user-images.githubusercontent.com/15522554/229937870-ee9cb56f-6f71-4ecc-9b62-35fe8b1432d4.gif"/>
-<img align="left" src="https://user-images.githubusercontent.com/15522554/229932076-43a6770d-b4a3-45ec-b473-f235c98b2d1b.png"/>
+<img align="left" src="https://user-images.githubusercontent.com/15522554/229939089-fc47cbb0-c168-451a-9003-e61a53243140.gif"/>
 </a>
 <h3 align="center">Android Image Slider</h3>
 <p>This is an android image slider library. Just add the images you want to view. </p>
