@@ -19,9 +19,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/db19e5bd13bb4396a4adcbc1954325cc)](https://www.codacy.com/manual/denzcoskun/ImageSlideshow?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=denzcoskun/ImageSlideshow&amp;utm_campaign=Badge_Grade)
 
 ## Usage
-'space'
 - Add ImageSlider to your **layout**
-'space'
 ```xml  
 <com.denzcoskun.imageslider.ImageSlider    
      android:id="@+id/image_slider"    
@@ -32,28 +30,20 @@
      app:iss_delay="1000"    
      app:iss_text_align="CENTER"/>  
 ```  
-
--You can change placeholder image.
-
+- You can change placeholder image.
 ```xml  
  app:iss_placeholder="@drawable/placeholder"  
 ```  
-
 - You can change error image.
-
 ```xml  
  app:iss_error_image="@drawable/error"  
 ```  
-
 - You can change indicators.
-
 ```xml  
 app:iss_selected_dot="@drawable/default_selected_dot"  
 app:iss_unselected_dot="@drawable/default_unselected_dot"  
 ```  
-
 - Add ImageSlider to your **Activity**
-
 ```kt  
 val imageList = ArrayList<SlideModel>() // Create image list  
   
@@ -67,9 +57,7 @@ imageList.add(SlideModel("https://bit.ly/3fLJf72", "And people do that."))
 val imageSlider = findViewById<ImageSlider>(R.id.image_slider)  
 imageSlider.setImageList(imageList)  
 ```  
-
 - You can change scaleType for all images or one image.
-
 <img src="https://user-images.githubusercontent.com/15522554/85434498-d0209080-b58e-11ea-83cc-ce79076391c1.jpg">  
 
 ```kt  
@@ -82,28 +70,21 @@ imageList.add(SlideModel("String Url" or R.drawable, "Title", ScaleTypes.FIT) //
   
 imageSlider.setImageList(imageList, ScaleTypes.FIT) // for all images  
 ```  
-
 - You can change title background on xml.
-
 <img src="https://user-images.githubusercontent.com/15522554/85441920-4b3a7480-b598-11ea-9154-338a8577552b.jpg">  
 
 ```xml  
  app:iss_title_background="@drawable/gradient" //or app:iss_title_background="@android:color/holo_red_light"  
 ```  
 - Also change text color on xml. It is default white.
-
 ```xml  
  app:iss_text_color="#FFA0A0"   
 ```  
-
 - Indicators can be remove.
-
 ```xml  
  app:iss_no_dots="true"   
 ```  
-
 - You can use click listener or double click listener.
-
 ```kt  
 imageSlider.setItemClickListener(object : ItemClickListener {    
     override fun onItemSelected(position: Int) {    
@@ -116,12 +97,10 @@ imageSlider.setItemClickListener(object : ItemClickListener {
  } })  
 ```  
 - You can add animation like that, <b>14 Animations added</b>. You can check in <a href="https://github.com/denzcoskun/ImageSlideshow/blob/master/imageslider/src/main/java/com/denzcoskun/imageslider/constants/AnimationTypes.kt"> Animation List </a>
-
 ```kt  
 imageSlider.setSlideAnimation(AnimationTypes.ZOOM_OUT)  
 ```  
 - You can add stop and start auto sliding again.
-
 ```kt  
 imageSlider.startSliding(3000) // with new period  
 imageSlider.startSliding()  
@@ -137,6 +116,7 @@ allprojects {
 		maven { url 'https://jitpack.io' }
 	}
 }
+
 dependencies {
 	implementation 'com.github.denzcoskun:ImageSlideshow:0.1.2'
 }
