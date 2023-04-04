@@ -6,7 +6,6 @@ import android.os.Handler
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
@@ -14,13 +13,13 @@ import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager
 import com.denzcoskun.imageslider.adapters.ViewPagerAdapter
 import com.denzcoskun.imageslider.animations.*
-import com.denzcoskun.imageslider.constants.ActionTypes
 import com.denzcoskun.imageslider.constants.AnimationTypes
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.interfaces.ItemChangeListener
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.interfaces.TouchListener
 import com.denzcoskun.imageslider.models.SlideModel
+import java.lang.reflect.Field
 import java.util.*
 
 /**
@@ -81,11 +80,11 @@ class ImageSlider @JvmOverloads constructor(
         period = typedArray.getInt(R.styleable.ImageSlider_iss_period, 1000).toLong()
         delay = typedArray.getInt(R.styleable.ImageSlider_iss_delay, 1000).toLong()
         autoCycle = typedArray.getBoolean(R.styleable.ImageSlider_iss_auto_cycle, false)
-        placeholder = typedArray.getResourceId(R.styleable.ImageSlider_iss_placeholder, R.drawable.loading)
-        errorImage = typedArray.getResourceId(R.styleable.ImageSlider_iss_error_image, R.drawable.error)
+        placeholder = typedArray.getResourceId(R.styleable.ImageSlider_iss_placeholder, R.drawable.default_loading)
+        errorImage = typedArray.getResourceId(R.styleable.ImageSlider_iss_error_image, R.drawable.default_error)
         selectedDot = typedArray.getResourceId(R.styleable.ImageSlider_iss_selected_dot, R.drawable.default_selected_dot)
         unselectedDot = typedArray.getResourceId(R.styleable.ImageSlider_iss_unselected_dot, R.drawable.default_unselected_dot)
-        titleBackground = typedArray.getResourceId(R.styleable.ImageSlider_iss_title_background, R.drawable.gradient)
+        titleBackground = typedArray.getResourceId(R.styleable.ImageSlider_iss_title_background, R.drawable.default_gradient)
         noDots = typedArray.getBoolean(R.styleable.ImageSlider_iss_no_dots, false)
 
         if (typedArray.getString(R.styleable.ImageSlider_iss_text_align) != null){
@@ -184,7 +183,6 @@ class ImageSlider @JvmOverloads constructor(
     }
 
     private fun setupDots(size: Int) {
-        println(indicatorAlign)
         pagerDots!!.gravity = getGravityFromAlign(indicatorAlign)
         pagerDots!!.removeAllViews()
         dots = arrayOfNulls(size)
@@ -244,6 +242,9 @@ class ImageSlider @JvmOverloads constructor(
     }
 
     private fun scheduleTimer(period: Long) {
+
+        viewPager!!.setViewPageScroller(ViewPagerScroller(context))
+
         val handler = Handler()
         val update = Runnable {
             if (currentPage == imageCount) {
@@ -258,6 +259,18 @@ class ImageSlider @JvmOverloads constructor(
                 handler.post(update)
             }
         }, delay, period)
+    }
+
+    fun ViewPager.setViewPageScroller(viewPageScroller: ViewPagerScroller) {
+        try {
+            val mScroller: Field = ViewPager::class.java.getDeclaredField("mScroller")
+            mScroller.isAccessible = true
+            mScroller.set(this, viewPageScroller)
+        } catch (_: NoSuchFieldException) {
+        } catch (_: IllegalArgumentException) {
+        } catch (_: IllegalAccessException) {
+        }
+
     }
 
     /**

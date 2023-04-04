@@ -1,12 +1,17 @@
+<a href="https://github.com/denzcoskun/ImageSlideshow">
 <img src="https://user-images.githubusercontent.com/15522554/54867096-7169d700-4d8d-11e9-8f9a-bee162a01427.png">
-<a href="https://github.com/Ramotion/cardslider-android">
-<img align="left" src="https://user-images.githubusercontent.com/15522554/85434507-d3b41780-b58e-11ea-9386-42741f0921ae.gif"/></a>
-<p><h1 align="left">Android Image Slide</h1></p>
+</a>
+<p></p>
+<a href="https://github.com/denzcoskun/ImageSlideshow">
+<img align="left" src="https://user-images.githubusercontent.com/15522554/229931372-db70cfd5-2e37-4e45-a4e1-aae6e0654063.gif"/>
+<img align="left" src="https://user-images.githubusercontent.com/15522554/229932076-43a6770d-b4a3-45ec-b473-f235c98b2d1b.png"/>
+</a>
+<h3 align="center">Android Image Slider</h3>
 <p>This is an android image slider library. Just add the images you want to view. </p>
-<p>You can use automatic scrolling for the time you set.  </p>
-<p>You can also add the title you want to the images.</p>
-<p>You can set corner radius images.</p>
-<p>You can use with Java or Kotlin.</p>
+<li>You can use automatic scrolling for the time you set.  </li>
+<li>You can also add the title you want to the images.</li>
+<li>You can set corner radius images.</li>
+<li>You can use with Java or Kotlin.</p>
 </br></br>
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-ImageSlideshow-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7587)
@@ -19,13 +24,14 @@
 -   Add ImageSlider to your **layout**
 
 ```xml
-<com.denzcoskun.imageslider.ImageSlider
-        android:id="@+id/image_slider"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        app:iss_auto_cycle="true"
-        app:iss_period="1000"
-        app:iss_delay="0"/>
+<com.denzcoskun.imageslider.ImageSlider  
+	  android:id="@+id/image_slider"  
+	  android:layout_width="wrap_content"  
+	  android:layout_height="300dp"  
+	  app:iss_auto_cycle="true"  
+	  app:iss_period="1000"  
+	  app:iss_delay="1000"  
+	  app:iss_text_align="CENTER"/>
 ```
 
 -   You can change placeholder image.
@@ -87,17 +93,38 @@ imageSlider.setImageList(imageList, ScaleTypes.FIT) // for all images
  //or
  app:iss_title_background="@android:color/holo_red_light"
 ```
+-   Also change text color on xml. It is default white.
 
--   You can use click listener.
-
-```kt
-imageSlider.setItemClickListener(object : ItemClickListener {
-    override fun onItemSelected(position: Int) {
-	// You can listen here
-    }
-})
+```xml
+ app:iss_text_color="#FFA0A0" 
 ```
 
+-   Indicators can be remove.
+
+```xml
+ app:iss_no_dots="true" 
+```
+
+-   You can use click listener or double click listener.
+
+```kt
+imageSlider.setItemClickListener(object : ItemClickListener {  
+    override fun onItemSelected(position: Int) {  
+        // You can listen here.
+    }  
+    
+    override fun doubleClick(position: Int) {  
+		 // Do not use onItemSelected if you are using a double click listener at the same time.  
+		 // Its just added for specific cases. 
+		 // Listen for clicks under 250 milliseconds.
+    }  
+})
+```
+-   You can add animation like that, <b>14 Animations added</b>. You can check in <a href="https://github.com/denzcoskun/ImageSlideshow/blob/master/imageslider/src/main/java/com/denzcoskun/imageslider/constants/AnimationTypes.kt"> Animation List </a>
+
+```kt
+imageSlider.setSlideAnimation(AnimationTypes.ZOOM_OUT)
+```
 -   You can add stop and start auto sliding again.
 
 ```kt
@@ -110,15 +137,15 @@ imageSlider.stopSliding()
 
 ```xml
 allprojects {
-    repositories {
+        repositories {
         ...
         maven { url 'https://jitpack.io' }
-    }
-}
+        }
+        }
 
-dependencies {
-	implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
-}
+        dependencies {
+        implementation 'com.github.denzcoskun:ImageSlideshow:0.1.1'
+        }
 ```
 
 ## 📄 License

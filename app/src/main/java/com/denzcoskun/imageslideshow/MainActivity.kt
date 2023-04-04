@@ -26,12 +26,13 @@ class MainActivity : AppCompatActivity() {
         val imageSlider = findViewById<ImageSlider>(R.id.image_slider) // init imageSlider
 
         val imageList = ArrayList<SlideModel>() // Create image list
-        imageList.add(SlideModel("https://bit.ly/37Rn50u", "Baby Owl", ScaleTypes.CENTER_CROP))
-        imageList.add(SlideModel("https://bit.ly/2BteuF2", "Elephants and tigers may become extinct."))
-        imageList.add(SlideModel("https://bit.ly/3fLJf72", "The population of elephants is decreasing in the world."))
+        imageList.add(SlideModel("https://t.ly/aaa_", "The future is our hands."))
+        imageList.add(SlideModel("https://t.ly/sg91", "Climate change is moving very fast."))
+        imageList.add(SlideModel("https://t.ly/hqW3", "The population has decreased by 27 percent in the last 5 years."))
 
-        imageSlider.setImageList(imageList)
-        imageSlider.setSlideAnimation(AnimationTypes.GATE)
+        imageSlider.setImageList(imageList, ScaleTypes.CENTER_CROP)
+
+        imageSlider.setSlideAnimation(AnimationTypes.ZOOM_OUT)
 
         imageSlider.setItemClickListener(object : ItemClickListener {
             override fun onItemSelected(position: Int) {

@@ -18,7 +18,7 @@
             android:paddingBottom="40dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:background="@drawable/gradient"
+            android:background="@drawable/default_gradient"
             android:paddingTop="5dp">
         <TextView
             android:id="@+id/text_view"
