@@ -63,6 +63,7 @@ class ImageSlider @JvmOverloads constructor(
     private var touchListener: TouchListener? = null
 
     private var noDots = false
+    private var textColor = "#FFFFFF"
 
     init {
         LayoutInflater.from(getContext()).inflate(R.layout.image_slider, this, true)
@@ -88,22 +89,15 @@ class ImageSlider @JvmOverloads constructor(
         noDots = typedArray.getBoolean(R.styleable.ImageSlider_iss_no_dots, false)
 
         if (typedArray.getString(R.styleable.ImageSlider_iss_text_align) != null){
-            textAlign = typedArray.getString(R.styleable.ImageSlider_iss_text_align)
+            textAlign = typedArray.getString(R.styleable.ImageSlider_iss_text_align)!!
         }
 
         if (typedArray.getString(R.styleable.ImageSlider_iss_indicator_align) != null){
-            indicatorAlign = typedArray.getString(R.styleable.ImageSlider_iss_indicator_align)
+            indicatorAlign = typedArray.getString(R.styleable.ImageSlider_iss_indicator_align)!!
         }
 
-        if (touchListener != null){
-            viewPager!!.setOnTouchListener { _, event ->
-                when (event.action) {
-                    MotionEvent.ACTION_MOVE -> touchListener!!.onTouched(ActionTypes.MOVE)
-                    MotionEvent.ACTION_DOWN -> touchListener!!.onTouched(ActionTypes.DOWN)
-                    MotionEvent.ACTION_UP -> touchListener!!.onTouched(ActionTypes.UP)
-                }
-                false
-            }
+        if (typedArray.getString(R.styleable.ImageSlider_iss_text_color) != null){
+            textColor = typedArray.getString(R.styleable.ImageSlider_iss_text_color)!!
         }
 
     }
@@ -114,7 +108,7 @@ class ImageSlider @JvmOverloads constructor(
      * @param  imageList  the image list by user
      */
     fun setImageList(imageList: List<SlideModel>) {
-        viewPagerAdapter = ViewPagerAdapter( context, imageList, cornerRadius, errorImage, placeholder, titleBackground, textAlign)
+        viewPagerAdapter = ViewPagerAdapter( context, imageList, cornerRadius, errorImage, placeholder, titleBackground, textAlign, textColor)
         setAdapter(imageList)
     }
 
@@ -125,7 +119,7 @@ class ImageSlider @JvmOverloads constructor(
      * @param  scaleType  scale type for all image
      */
     fun setImageList(imageList: List<SlideModel>, scaleType: ScaleTypes? = null) {
-        viewPagerAdapter = ViewPagerAdapter( context, imageList, cornerRadius, errorImage, placeholder, titleBackground, scaleType, textAlign)
+        viewPagerAdapter = ViewPagerAdapter( context, imageList, cornerRadius, errorImage, placeholder, titleBackground, scaleType, textAlign, textColor)
         setAdapter(imageList)
     }
 

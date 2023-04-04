@@ -1,8 +1,6 @@
 package com.denzcoskun.imageslideshow
 
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.constants.ActionTypes
@@ -33,11 +31,19 @@ class MainActivity : AppCompatActivity() {
         imageList.add(SlideModel("https://bit.ly/3fLJf72", "The population of elephants is decreasing in the world."))
 
         imageSlider.setImageList(imageList)
-        imageSlider.setSlideAnimation(AnimationTypes.TOSS)
+        imageSlider.setSlideAnimation(AnimationTypes.GATE)
 
         imageSlider.setItemClickListener(object : ItemClickListener {
             override fun onItemSelected(position: Int) {
                 // You can listen here.
+                println("normal")
+            }
+
+            override fun doubleClick(position: Int) {
+                // Do not use onItemSelected if you are using a double click listener at the same time.
+                // Its just added for specific cases.
+                // Listen for clicks under 250 milliseconds.
+                println("its double")
             }
         })
 
@@ -48,11 +54,11 @@ class MainActivity : AppCompatActivity() {
         })
 
         imageSlider.setTouchListener(object : TouchListener {
-            override fun onTouched(touched: ActionTypes) {
+            override fun onTouched(touched: ActionTypes, position: Int) {
                 if (touched == ActionTypes.DOWN){
                     imageSlider.stopSliding()
                 } else if (touched == ActionTypes.UP ) {
-                   imageSlider.startSliding(1000)
+                    imageSlider.startSliding(1000)
                 }
             }
         })

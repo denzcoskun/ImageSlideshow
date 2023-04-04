@@ -14,5 +14,5 @@ interface TouchListener {
      *
      * @param  touched  slider boolean
      */
-    fun onTouched(touched: ActionTypes)
+    fun onTouched(touched: ActionTypes, position: Int)
 }

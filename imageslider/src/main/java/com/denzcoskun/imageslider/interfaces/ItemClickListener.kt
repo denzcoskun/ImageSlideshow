@@ -11,4 +11,11 @@ interface ItemClickListener {
      * @param  position  selected item position
      */
     fun onItemSelected(position: Int)
+
+    /**
+     * Click listener double click item function.
+     *
+     * @param  position  selected item position
+     */
+    fun doubleClick(position: Int)
 }

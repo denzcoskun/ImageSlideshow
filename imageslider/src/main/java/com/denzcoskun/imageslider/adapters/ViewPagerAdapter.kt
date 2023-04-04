@@ -1,6 +1,7 @@
 package com.denzcoskun.imageslider.adapters
 
 import android.content.Context
+import android.graphics.Color
 import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -10,7 +11,6 @@ import androidx.viewpager.widget.PagerAdapter
 import com.denzcoskun.imageslider.R
 import com.denzcoskun.imageslider.constants.ActionTypes
 import com.denzcoskun.imageslider.constants.ScaleTypes
-import com.denzcoskun.imageslider.interfaces.ItemChangeListener
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.interfaces.TouchListener
 import com.denzcoskun.imageslider.models.SlideModel
@@ -29,16 +29,20 @@ class ViewPagerAdapter(context: Context?,
                        private var placeholder: Int,
                        private var titleBackground: Int,
                        private var scaleType: ScaleTypes?,
-                       private var textAlign: String) : PagerAdapter() {
+                       private var textAlign: String,
+                       private var textColor: String) : PagerAdapter() {
 
-    constructor(context: Context, imageList: List<SlideModel>, radius: Int, errorImage: Int, placeholder: Int, titleBackground: Int, textAlign: String) :
-            this(context, imageList, radius, errorImage, placeholder, titleBackground, null, textAlign)
+    constructor(context: Context, imageList: List<SlideModel>, radius: Int, errorImage: Int, placeholder: Int, titleBackground: Int, textAlign: String, textColor: String) :
+            this(context, imageList, radius, errorImage, placeholder, titleBackground, null, textAlign, textColor)
 
     private var imageList: List<SlideModel>? = imageList
     private var layoutInflater: LayoutInflater? = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater?
 
     private var itemClickListener: ItemClickListener? = null
     private var touchListener: TouchListener? = null
+
+    private var lastTouchTime: Long = 0
+    private var currentTouchTime: Long = 0
 
     override fun isViewFromObject(view: View, obj: Any): Boolean {
         return view == obj
@@ -54,6 +58,7 @@ class ViewPagerAdapter(context: Context?,
         val imageView = itemView.findViewById<ImageView>(R.id.image_view)
         val linearLayout = itemView.findViewById<LinearLayout>(R.id.linear_layout)
         val textView = itemView.findViewById<TextView>(R.id.text_view)
+        textView.setTextColor(Color.parseColor(textColor))
 
         if (imageList!![position].title != null){
             textView.text = imageList!![position].title
@@ -87,19 +92,29 @@ class ViewPagerAdapter(context: Context?,
 
         container.addView(itemView)
 
-        imageView.setOnClickListener{itemClickListener?.onItemSelected(position)}
+        imageView.setOnClickListener {
+            lastTouchTime = currentTouchTime;
+            currentTouchTime = System.currentTimeMillis();
+            when {
+                currentTouchTime - lastTouchTime < 250 -> {
+                    itemClickListener?.doubleClick(position)
+                }
+                else -> {
+                    itemClickListener?.onItemSelected(position)
+                }
+            }
+        }
 
         if (touchListener != null){
             imageView!!.setOnTouchListener { v, event ->
                 when (event.action) {
-                    MotionEvent.ACTION_MOVE -> touchListener!!.onTouched(ActionTypes.MOVE)
-                    MotionEvent.ACTION_DOWN -> touchListener!!.onTouched(ActionTypes.DOWN)
-                    MotionEvent.ACTION_UP -> touchListener!!.onTouched(ActionTypes.UP)
+                    MotionEvent.ACTION_MOVE -> touchListener!!.onTouched(ActionTypes.MOVE, position)
+                    MotionEvent.ACTION_DOWN -> touchListener!!.onTouched(ActionTypes.DOWN, position)
+                    MotionEvent.ACTION_UP -> touchListener!!.onTouched(ActionTypes.UP, position)
                 }
                 false
             }
         }
-
 
         return itemView
     }
