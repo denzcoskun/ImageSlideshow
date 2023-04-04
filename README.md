@@ -19,9 +19,9 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/db19e5bd13bb4396a4adcbc1954325cc)](https://www.codacy.com/manual/denzcoskun/ImageSlideshow?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=denzcoskun/ImageSlideshow&amp;utm_campaign=Badge_Grade)
 
 ## Usage
-
+'space'
 - Add ImageSlider to your **layout**
-
+'space'
 ```xml  
 <com.denzcoskun.imageslider.ImageSlider    
      android:id="@+id/image_slider"    
@@ -33,7 +33,7 @@
      app:iss_text_align="CENTER"/>  
 ```  
 
-- You can change placeholder image.
+-You can change placeholder image.
 
 ```xml  
  app:iss_placeholder="@drawable/placeholder"  
