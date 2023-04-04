@@ -3,7 +3,7 @@
 <img src="https://user-images.githubusercontent.com/15522554/54867096-7169d700-4d8d-11e9-8f9a-bee162a01427.png">  
 </a>  
 <a href="https://github.com/denzcoskun/ImageSlideshow">  
-<img align="left" src="https://user-images.githubusercontent.com/15522554/229939963-cda2c7fc-a4fb-4d6c-9e07-20721d39cad9.gif"/>  
+<img align="left" src="https://user-images.githubusercontent.com/15522554/229944463-5957a2b5-81e2-4cf7-9efa-ab23313e9a39.gif"/>  
 </a>  
 <h1 align="center">Android Image Slider</h1>  
 <p>This is an android image slider library. Just add the images you want to view. </p>  
@@ -30,20 +30,20 @@
      app:iss_delay="1000"    
      app:iss_text_align="CENTER"/>  
 ```  
-- You can change placeholder image.
+-   You can change placeholder image.
 ```xml  
  app:iss_placeholder="@drawable/placeholder"  
 ```  
-- You can change error image.
+-   You can change error image.
 ```xml  
  app:iss_error_image="@drawable/error"  
 ```  
-- You can change indicators.
+-   You can change indicators.
 ```xml  
 app:iss_selected_dot="@drawable/default_selected_dot"  
 app:iss_unselected_dot="@drawable/default_unselected_dot"  
 ```  
-- Add ImageSlider to your **Activity**
+-   Add ImageSlider to your **Activity**
 ```kt  
 val imageList = ArrayList<SlideModel>() // Create image list  
   
@@ -57,7 +57,7 @@ imageList.add(SlideModel("https://bit.ly/3fLJf72", "And people do that."))
 val imageSlider = findViewById<ImageSlider>(R.id.image_slider)  
 imageSlider.setImageList(imageList)  
 ```  
-- You can change scaleType for all images or one image.
+-   You can change scaleType for all images or one image.
 <img src="https://user-images.githubusercontent.com/15522554/85434498-d0209080-b58e-11ea-83cc-ce79076391c1.jpg">  
 
 ```kt  
@@ -70,21 +70,21 @@ imageList.add(SlideModel("String Url" or R.drawable, "Title", ScaleTypes.FIT) //
   
 imageSlider.setImageList(imageList, ScaleTypes.FIT) // for all images  
 ```  
-- You can change title background on xml.
+-   You can change title background on xml.
 <img src="https://user-images.githubusercontent.com/15522554/85441920-4b3a7480-b598-11ea-9154-338a8577552b.jpg">  
 
 ```xml  
  app:iss_title_background="@drawable/gradient" //or app:iss_title_background="@android:color/holo_red_light"  
 ```  
-- Also change text color on xml. It is default white.
+-   Also change text color on xml. It is default white.
 ```xml  
  app:iss_text_color="#FFA0A0"   
 ```  
-- Indicators can be remove.
+-   Indicators can be remove.
 ```xml  
  app:iss_no_dots="true"   
 ```  
-- You can use click listener or double click listener.
+-   You can use click listener or double click listener.
 ```kt  
 imageSlider.setItemClickListener(object : ItemClickListener {    
     override fun onItemSelected(position: Int) {    
@@ -96,11 +96,11 @@ imageSlider.setItemClickListener(object : ItemClickListener {
        // Listen for clicks under 250 milliseconds.  
  } })  
 ```  
-- You can add animation like that, <b>14 Animations added</b>. You can check in <a href="https://github.com/denzcoskun/ImageSlideshow/blob/master/imageslider/src/main/java/com/denzcoskun/imageslider/constants/AnimationTypes.kt"> Animation List </a>
+-   You can add animation like that, <b>14 Animations added</b>. You can check in <a href="https://github.com/denzcoskun/ImageSlideshow/blob/master/imageslider/src/main/java/com/denzcoskun/imageslider/constants/AnimationTypes.kt"> Animation List </a>
 ```kt  
 imageSlider.setSlideAnimation(AnimationTypes.ZOOM_OUT)  
 ```  
-- You can add stop and start auto sliding again.
+-   You can add stop and start auto sliding again.
 ```kt  
 imageSlider.startSliding(3000) // with new period  
 imageSlider.startSliding()  
