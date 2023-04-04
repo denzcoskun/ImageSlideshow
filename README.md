@@ -1,7 +1,6 @@
 <a href="https://github.com/denzcoskun/ImageSlideshow">
 <img src="https://user-images.githubusercontent.com/15522554/54867096-7169d700-4d8d-11e9-8f9a-bee162a01427.png">
 </a>
-<p></p>
 <a href="https://github.com/denzcoskun/ImageSlideshow">
 <img align="left" src="https://user-images.githubusercontent.com/15522554/229931372-db70cfd5-2e37-4e45-a4e1-aae6e0654063.gif"/>
 <img align="left" src="https://user-images.githubusercontent.com/15522554/229932076-43a6770d-b4a3-45ec-b473-f235c98b2d1b.png"/>
@@ -144,7 +143,7 @@ allprojects {
         }
 
         dependencies {
-        implementation 'com.github.denzcoskun:ImageSlideshow:0.1.1'
+        implementation 'com.github.denzcoskun:ImageSlideshow:0.1.2'
         }
 ```
 
