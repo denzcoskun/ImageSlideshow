@@ -6,14 +6,13 @@
 <img align="left" src="https://user-images.githubusercontent.com/15522554/229944463-5957a2b5-81e2-4cf7-9efa-ab23313e9a39.gif"/>  
 </a>  
 <h1 align="center">Android Image Slider</h1>  
-<p align="center">This is an android image slider library. Just add the images you want to view. </p>  
+<p align="center">Just add the images you want to view. </p>  
 <li>Easy to use. </li>
 <li>Automatic scrolling for the time you set. </li>
 <li>Add any caption to the images.</li>
 <li>14 different slide animations.</li>
 <li>Adjust corner radius images.</li>
 <li>Use with Java or Kotlin.</p>
-</br>
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-ImageSlideshow-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7587)
 [![license](https://img.shields.io/github/license/denzcoskun/imageslideshow.svg?style=popout)](https://opensource.org/licenses/Apache-2.0)
