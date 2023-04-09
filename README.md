@@ -13,6 +13,7 @@
 <li>14 different slide animations.</li>
 <li>Adjust corner radius images.</li>
 <li>Use with Java or Kotlin.</p>
+</br>
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-ImageSlideshow-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7587)
 [![license](https://img.shields.io/github/license/denzcoskun/imageslideshow.svg?style=popout)](https://opensource.org/licenses/Apache-2.0)
