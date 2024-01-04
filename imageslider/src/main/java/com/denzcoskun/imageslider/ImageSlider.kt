@@ -84,7 +84,6 @@ class ImageSlider @JvmOverloads constructor(
         errorImage = typedArray.getResourceId(R.styleable.ImageSlider_iss_error_image, R.drawable.default_error)
         selectedDot = typedArray.getResourceId(R.styleable.ImageSlider_iss_selected_dot, R.drawable.default_selected_dot)
         unselectedDot = typedArray.getResourceId(R.styleable.ImageSlider_iss_unselected_dot, R.drawable.default_unselected_dot)
-        titleBackground = typedArray.getResourceId(R.styleable.ImageSlider_iss_title_background, R.drawable.default_gradient)
         noDots = typedArray.getBoolean(R.styleable.ImageSlider_iss_no_dots, false)
 
         if (typedArray.getString(R.styleable.ImageSlider_iss_text_align) != null){
